@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{CC239CB2-C9CC-B998-0877-52E4218D74CD}") = "DangoPlop", "Assembly-CSharp.csproj", "{52FEEC8C-1458-F6B0-3372-B7099B6F30DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52FEEC8C-1458-F6B0-3372-B7099B6F30DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52FEEC8C-1458-F6B0-3372-B7099B6F30DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52FEEC8C-1458-F6B0-3372-B7099B6F30DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52FEEC8C-1458-F6B0-3372-B7099B6F30DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
