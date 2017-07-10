@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball_Behavioiur : MonoBehaviour {
-    public GameObject player;
-    public GameObject ball;
-    public Vector2 ballPos;
-    public Rigidbody2D rb;
-    public int thrust;
-    public CircleCollider2D circle;
-    public int counter;
+    private GameObject player;
+    private Rigidbody2D rb;
+    private int thrust;
+    private CircleCollider2D circle;
 
     // Use this for initialization
     void Start () {
-        ball = GameObject.FindGameObjectWithTag("Ball");
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         circle = GetComponent<CircleCollider2D>();
@@ -25,7 +21,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        ballPos = ball.transform.position;
         circle.isTrigger = false;
 		
 	}
