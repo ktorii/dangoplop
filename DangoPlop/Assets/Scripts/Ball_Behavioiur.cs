@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ball_Behavioiur : MonoBehaviour {
     private GameObject player;
     private Rigidbody2D rb;
-    private int thrust;
+    public int thrust;
     private CircleCollider2D circle;
 
     // Use this for initialization
