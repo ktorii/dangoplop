@@ -88,13 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724a7c63941f0ad46bac517ac4a9feb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  ball: {fileID: 0}
-  ballPos: {x: 0, y: 0}
-  rb: {fileID: 0}
-  thrust: 0
-  circle: {fileID: 0}
-  counter: 0
+  thrust: 100
 --- !u!212 &212549549033552714
 SpriteRenderer:
   m_ObjectHideFlags: 1

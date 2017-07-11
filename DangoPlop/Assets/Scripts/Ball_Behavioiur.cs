@@ -13,7 +13,6 @@ public class Ball_Behavioiur : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         circle = GetComponent<CircleCollider2D>();
-        thrust = 100;
         rb.AddForce(Vector2.right * thrust); 
 
          
