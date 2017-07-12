@@ -400,9 +400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e91fb2b92754638b731cec861dde64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedScale: 0.4
+  speedScale: 4
   maxHorizontalSpeed: 3
-  baseJumpImpulse: 4
+  baseJumpPower: 5
   groundYPosition: 0.3
 --- !u!70 &577200292
 CapsuleCollider2D:
