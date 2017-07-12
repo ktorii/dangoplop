@@ -17,25 +17,24 @@ public class PlayerController : MonoBehaviour {
 
 		float moveVertical = Input.GetAxis ("Vertical");
 		// dango can only jump if it's on the ground
-		if(moveVertical > 0 && rb2d.position.y <= groundYPosition){
+		if(moveVertical > 0 && rb2d.position.y <= groundYPosition) {
 			moveVertical = baseJumpPower;
 		}
-		else{
+		else {
 			moveVertical = 0;
 		}
 
 		Vector2 verticalMoveDelta = new Vector2 (0, moveVertical);
 		rb2d.AddForce (verticalMoveDelta, ForceMode2D.Impulse);
 
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		Vector2 horizontalMoveDelta = new Vector2 (moveHorizontal, 0);
-
-		rb2d.AddForce (horizontalMoveDelta * speedScale, ForceMode2D.Impulse);
+		float moveHorizontal = Input.GetAxis ("Horizontal") * speedScale;
 
 		// limit dango's horizontal speed
-		if(rb2d.velocity.x > maxHorizontalSpeed){
-			rb2d.velocity.Set (maxHorizontalSpeed, rb2d.velocity.y);
+		if(moveHorizontal > maxHorizontalSpeed) {
+			moveHorizontal = maxHorizontalSpeed;
 		}
+
+		rb2d.velocity = new Vector2 (moveHorizontal, rb2d.velocity.y);
 	}
 
 }
