@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Ball
   - Test
+  - Projectile
+  - OGBall
+  - Large Ball
+  - Medium Ball
+  - Small Ball
+  - Top
   layers:
   - Default
   - TransparentFX
