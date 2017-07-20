@@ -9,9 +9,14 @@ public class PlayerController : MonoBehaviour {
 	public float maxHorizontalSpeed;
 	public float baseJumpPower;
 	public float groundYPosition;
+	public GameObject Projectile;
+	Transform ProjectilePos;
+	public float fireRate = 0.5F;
+	private float nextFire = 0.0F;
 
 	void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
+		ProjectilePos = transform.Find("ProjectilePos");
 	}
 	void FixedUpdate() {
 
@@ -33,8 +38,17 @@ public class PlayerController : MonoBehaviour {
 		if(moveHorizontal > maxHorizontalSpeed) {
 			moveHorizontal = maxHorizontalSpeed;
 		}
+		if (Input.GetKeyDown (KeyCode.Space) && Time.time > nextFire) {
+			nextFire = Time.time + fireRate;
+			Fire ();
+		}
 
 		rb2d.velocity = new Vector2 (moveHorizontal, rb2d.velocity.y);
 	}
+	void Fire(){
+
+		Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
+	}
+
 
 }
