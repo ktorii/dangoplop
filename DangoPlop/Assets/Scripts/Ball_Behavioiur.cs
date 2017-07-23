@@ -38,15 +38,15 @@ public class Ball_Behavioiur : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         circle = GetComponent<CircleCollider2D>();
-        rb.AddForce(Vector2.right * thrust); 
+        rb.AddForce(Vector2.right * thrust);
 
-         
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         circle.isTrigger = false;
-		
+
 	}
 
     private void OnCollisionEnter2D(Collision2D coll)
@@ -54,7 +54,7 @@ public class Ball_Behavioiur : MonoBehaviour {
         if (coll.gameObject.tag == "Ball")
         {
             circle.isTrigger = true;
-            
+
         }
     }
 
@@ -74,7 +74,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 			ball1Obj.transform.Translate (Ball1TranslateX, Ball1TranslateY, 0, Space.World);
 			ball2Obj.transform.position = temp;
 			ball2Obj.transform.Translate (Ball2TranslateX, Ball2TranslateY, 0, Space.World);
-			var Largeballscale = new Vector3 (LargeBallScale, LargeBallScale, 1);
+			var largeballscale = new Vector3 (LargeBallScale, LargeBallScale, 1);
 			var medballscale = new Vector3 (MedBallScale, MedBallScale, 1);
 			var smallballscale = new Vector3 (SmallBallScale, SmallBallScale, 1);
 
@@ -91,7 +91,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2Obj.transform.localScale = medballscale;
 				ball1.type = SizeType.MediumBall;
 				ball2.type = SizeType.MediumBall;
-	
+
 			}
 
 			if (type == SizeType.MediumBall) {
@@ -115,7 +115,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	}
 
 
-		
+
 
 	void OnTriggerEnter2D(Collider2D blip){
 		HandleSplit ();
