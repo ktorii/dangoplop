@@ -90,14 +90,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 200
-  LargeBallScale: 0.7
+  Ball: {fileID: 1124136323892240}
+  LargeBallScale: 1
   MedBallScale: 0.5
   SmallBallScale: 0.3
-  Ball: {fileID: 1124136323892240}
   Ball1TranslateX: -0.4
   Ball2TranslateX: 0.4
   Ball1TranslateY: 0
   Ball2TranslateY: 0
+  GameStart: 1
 --- !u!212 &212549549033552714
 SpriteRenderer:
   m_ObjectHideFlags: 1

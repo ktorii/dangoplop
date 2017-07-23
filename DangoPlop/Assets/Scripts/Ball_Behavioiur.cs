@@ -18,16 +18,17 @@ public class Ball_Behavioiur : MonoBehaviour {
     private Rigidbody2D rb;
     public int thrust;
     private CircleCollider2D circle;
+	public GameObject Ball;
+	private GameObject Projectile;
+	private SizeType type = SizeType.LargeBall;
 	public float LargeBallScale;
 	public float MedBallScale;
 	public float SmallBallScale;
-	public GameObject Ball;
-	private GameObject Projectile;
 	public float Ball1TranslateX;
-	private SizeType type = SizeType.Ball;
 	public float Ball2TranslateX;
 	public float Ball1TranslateY;
 	public float Ball2TranslateY;
+	public bool GameStart = true;
 
 
 
@@ -39,13 +40,21 @@ public class Ball_Behavioiur : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         circle = GetComponent<CircleCollider2D>();
         rb.AddForce(Vector2.right * thrust);
-
-
+		
 	}
+
+
+		
 
 	// Update is called once per frame
 	void Update () {
         circle.isTrigger = false;
+		var largeballscale = new Vector3 (LargeBallScale, LargeBallScale, 1);
+		if (GameStart == true) {
+			Ball.transform.localScale = largeballscale;
+			GameStart = false;
+		} 
+
 
 	}
 
@@ -61,7 +70,9 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 	void HandleSplit(){
 		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
+
 		if (type != SizeType.SmallBall) {
+			
 			var ball1Obj = Instantiate (Ball);
 			var ball2Obj = Instantiate (Ball);
 			Ball_Behavioiur ball1 = ball1Obj.GetComponent<Ball_Behavioiur> ();
@@ -74,17 +85,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 			ball1Obj.transform.Translate (Ball1TranslateX, Ball1TranslateY, 0, Space.World);
 			ball2Obj.transform.position = temp;
 			ball2Obj.transform.Translate (Ball2TranslateX, Ball2TranslateY, 0, Space.World);
-			var largeballscale = new Vector3 (LargeBallScale, LargeBallScale, 1);
 			var medballscale = new Vector3 (MedBallScale, MedBallScale, 1);
 			var smallballscale = new Vector3 (SmallBallScale, SmallBallScale, 1);
-
-
-			if (type == SizeType.Ball) {
-				ball1Obj.transform.localScale = Largeballscale;
-				ball2Obj.transform.localScale = Largeballscale;
-				ball1.type = SizeType.LargeBall;
-				ball2.type = SizeType.LargeBall;
-			}
 
 			if (type == SizeType.LargeBall) {
 				ball1Obj.transform.localScale = medballscale;
@@ -92,9 +94,10 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball1.type = SizeType.MediumBall;
 				ball2.type = SizeType.MediumBall;
 
+
 			}
 
-			if (type == SizeType.MediumBall) {
+			else if (type == SizeType.MediumBall) {
 				ball1Obj.transform.localScale = smallballscale;
 				ball2Obj.transform.localScale = smallballscale;
 				ball1.type = SizeType.SmallBall;
@@ -105,12 +108,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 		}
 		if (Projectile == true) {
-			if (type != SizeType.SmallBall) {
-				Destroy (gameObject);
-			}
-			if (type  == SizeType.SmallBall) {
-				Destroy (gameObject);
-			}
+			Destroy (gameObject);
 		}
 	}
 
