@@ -7,11 +7,7 @@ TagManager:
   - Ball
   - Test
   - Projectile
-  - OGBall
-  - Large Ball
-  - Medium Ball
-  - Small Ball
-  - Top
+  - Ceiling
   layers:
   - Default
   - TransparentFX

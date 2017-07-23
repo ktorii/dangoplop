@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 	public float baseJumpPower;
 	public float groundYPosition;
 	public GameObject Projectile;
-	Transform ProjectilePos;
+	private Transform ProjectilePos;
 	public float fireRate = 0.5F;
 	private float nextFire = 0.0F;
 

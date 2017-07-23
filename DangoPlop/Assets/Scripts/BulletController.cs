@@ -22,21 +22,12 @@ public class BulletController : MonoBehaviour {
 		
 
 	void OnTriggerEnter2D(Collider2D target){
-		if (target.gameObject.CompareTag ("OGBall")) {
+		if (target.gameObject.CompareTag ("Ceiling")) {
 			Destroy (gameObject);
 		}
-		if (target.gameObject.CompareTag ("Top")) {
-			Destroy (gameObject);
-		}
-		if (target.gameObject.CompareTag ("Large Ball")) {
-			Destroy (gameObject);
-		}
-		if (target.gameObject.CompareTag ("Medium Ball")) {
-			Destroy (gameObject);
-		}
-		if (target.gameObject.CompareTag ("Small Ball")) {
-			Destroy (gameObject);
 
+		if (target.gameObject.tag == "Ball") {
+			Destroy (gameObject);
 		}
 	}
 		

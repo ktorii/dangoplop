@@ -2,25 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SizeType
+{
+	Ball,
+	LargeBall,
+	MediumBall,
+	SmallBall
+
+}
+
+
+
 public class Ball_Behavioiur : MonoBehaviour {
     private GameObject player;
     private Rigidbody2D rb;
     public int thrust;
     private CircleCollider2D circle;
-	public float OGBallscaleY;
-	public float OGBallscaleX;
-	public float MedBallscaleY;
-	public float MedBallscaleX;
-	public float SmallBallscaleY;
-	public float SmallBallscaleX;
+	public float LargeBallScale;
+	public float MedBallScale;
+	public float SmallBallScale;
+	public GameObject Ball;
+	private GameObject Projectile;
+	public float Ball1TranslateX;
+	private SizeType type = SizeType.Ball;
+	public float Ball2TranslateX;
+	public float Ball1TranslateY;
+	public float Ball2TranslateY;
 
 
-	[SerializeField]
-	private GameObject OGBall;
 
-	private GameObject ball1, ball2;
-
-	private Ball_Behavioiur ball1Script, ball2Script;
 
 
     // Use this for initialization
@@ -48,71 +58,66 @@ public class Ball_Behavioiur : MonoBehaviour {
         }
     }
 
-	void InstantiateSplit(){
-		if (this.gameObject.tag != "Small Ball" ) {
-			ball1 = Instantiate (OGBall);
-			ball2 = Instantiate (OGBall);
-			ball1Script = ball1.GetComponent<Ball_Behavioiur> ();
-			ball2Script = ball2.GetComponent<Ball_Behavioiur> ();
-			ball1.GetComponent<Rigidbody2D> ();
-			ball2.GetComponent<Rigidbody2D> ();
+
+	void HandleSplit(){
+		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
+		if (type != SizeType.SmallBall) {
+			var ball1Obj = Instantiate (Ball);
+			var ball2Obj = Instantiate (Ball);
+			Ball_Behavioiur ball1 = ball1Obj.GetComponent<Ball_Behavioiur> ();
+			Ball_Behavioiur ball2 = ball2Obj.GetComponent<Ball_Behavioiur> ();
+			ball1Obj.GetComponent<Rigidbody2D> ();
+			ball2Obj.GetComponent<Rigidbody2D> ();
+
+			Vector2 temp = transform.position;
+			ball1Obj.transform.position = temp;
+			ball1Obj.transform.Translate (Ball1TranslateX, Ball1TranslateY, 0, Space.World);
+			ball2Obj.transform.position = temp;
+			ball2Obj.transform.Translate (Ball2TranslateX, Ball2TranslateY, 0, Space.World);
+			var Largeballscale = new Vector3 (LargeBallScale, LargeBallScale, 1);
+			var medballscale = new Vector3 (MedBallScale, MedBallScale, 1);
+			var smallballscale = new Vector3 (SmallBallScale, SmallBallScale, 1);
+
+
+			if (type == SizeType.Ball) {
+				ball1Obj.transform.localScale = Largeballscale;
+				ball2Obj.transform.localScale = Largeballscale;
+				ball1.type = SizeType.LargeBall;
+				ball2.type = SizeType.LargeBall;
+			}
+
+			if (type == SizeType.LargeBall) {
+				ball1Obj.transform.localScale = medballscale;
+				ball2Obj.transform.localScale = medballscale;
+				ball1.type = SizeType.MediumBall;
+				ball2.type = SizeType.MediumBall;
+	
+			}
+
+			if (type == SizeType.MediumBall) {
+				ball1Obj.transform.localScale = smallballscale;
+				ball2Obj.transform.localScale = smallballscale;
+				ball1.type = SizeType.SmallBall;
+				ball2.type = SizeType.SmallBall;
+
+
+			}
 
 		}
-
+		if (Projectile == true) {
+			if (type != SizeType.SmallBall) {
+				Destroy (gameObject);
+			}
+			if (type  == SizeType.SmallBall) {
+				Destroy (gameObject);
+			}
+		}
 	}
 
-	void InstantiateBalls(){
-		InstantiateSplit ();
 
-		Vector2 temp = transform.position;
-
-  		ball1.transform.position = temp;
-		ball1.transform.Translate(-0.4f, 0, 0, Space.World);
-		ball2.transform.position = temp;
-		ball2.transform.Translate(+0.4f, 0, 0, Space.World);
-		var OGballscale = new Vector3 (OGBallscaleX, OGBallscaleY, 1);
-		var medballscale = new Vector3 (MedBallscaleX, MedBallscaleY, 1);
-		var smallballscale = new Vector3 (SmallBallscaleX, SmallBallscaleY, 1);
-
-
-		if (gameObject.tag == "OGBall") {
-			ball1.transform.localScale = OGballscale;
-			ball2.transform.localScale = OGballscale;
-			ball1.tag = "Large Ball";
-			ball2.tag = "Large Ball";
-		}
-
-		if (gameObject.tag == "Large Ball") {
-			ball1.transform.localScale = medballscale;
-			ball2.transform.localScale = medballscale;
-			ball1.tag = "Medium Ball";
-			ball2.tag = "Medium Ball";
-		}
-
-		if (gameObject.tag == "Medium Ball") {
-			ball1.transform.localScale = smallballscale;
-			ball2.transform.localScale = smallballscale;
-			ball1.tag = "Small Ball";
-			ball2.tag = "Small Ball";
-
-		}
-	}
-		
 		
 
 	void OnTriggerEnter2D(Collider2D blip){
-		if (blip.tag == "Projectile") {
-			if (gameObject.tag != "Small Ball") {
-				InstantiateBalls ();
-				Destroy (gameObject);
-			}
-			if (gameObject.tag == "Small Ball") {
-				Destroy(gameObject);
-			}
-
-		}
+		HandleSplit ();
 	}
-
-		
-	
 }

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114328394808475752}
   m_Layer: 0
   m_Name: BouncingBall1
-  m_TagString: OGBall
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,13 +90,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 200
-  OGBallscaleY: 0.7
-  OGBallscaleX: 0.7
-  MedBallscaleY: 0.5
-  MedBallscaleX: 0.5
-  SmallBallscaleY: 0.3
-  SmallBallscaleX: 0.3
-  OGBall: {fileID: 1124136323892240}
+  LargeBallScale: 0.7
+  MedBallScale: 0.5
+  SmallBallScale: 0.3
+  Ball: {fileID: 1124136323892240}
+  Ball1TranslateX: -0.4
+  Ball2TranslateX: 0.4
+  Ball1TranslateY: 0
+  Ball2TranslateY: 0
 --- !u!212 &212549549033552714
 SpriteRenderer:
   m_ObjectHideFlags: 1
