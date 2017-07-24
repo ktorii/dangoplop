@@ -7,6 +7,8 @@ TagManager:
   - Ball
   - Test
   - Powerup
+  - Projectile
+  - Ceiling
   layers:
   - Default
   - TransparentFX
