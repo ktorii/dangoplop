@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLandedToDestroy: 2
   groundYPosition: 0.3
+  verticalSpeed: 2
 --- !u!212 &212120804139781696
 SpriteRenderer:
   m_ObjectHideFlags: 1
