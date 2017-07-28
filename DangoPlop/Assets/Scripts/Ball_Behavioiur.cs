@@ -116,6 +116,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 
 	void OnTriggerEnter2D(Collider2D blip){
-		HandleSplit ();
+		if (blip.gameObject.tag == "Projectile") {
+			HandleSplit ();
+		}
 	}
 }
