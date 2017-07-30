@@ -6,6 +6,8 @@ public class PowerupParent : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
 	static private string playerTag = "Player";
+	static private string ballTag = "Ball";
+	static private string projectileTag = "Projectile";
 	public float timeLandedToDestroy = 3;
 	public float groundYPosition;
 	public float verticalSpeed;
@@ -31,6 +33,10 @@ public class PowerupParent : MonoBehaviour {
 		if(other.tag == playerTag){
 			print("powerup collision detected");
 			Destroy(gameObject);
+		} else if (other.tag == ballTag) {
+			Physics2D.IgnoreCollision(other, GetComponent<Collider2D>());
+		} else if (other.tag == projectileTag) {
+			Physics2D.IgnoreCollision(other, GetComponent<Collider2D>());
 		}
 	}
 
