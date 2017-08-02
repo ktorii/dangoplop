@@ -1745,7 +1745,7 @@ GameObject:
   - component: {fileID: 1960204566}
   - component: {fileID: 1960204567}
   m_Layer: 0
-  m_Name: ArrowRight
+  m_Name: Power up panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
