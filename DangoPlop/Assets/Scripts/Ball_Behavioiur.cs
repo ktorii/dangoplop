@@ -21,6 +21,9 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public GameObject Ball;
 	private GameObject Projectile;
 	private SizeType type = SizeType.LargeBall;
+	public int LargeScoreValue = 10;
+	public int MedScoreValue = 20;
+	public int SmallScoreValue = 30;
 	public float LargeBallScale;
 	public float MedBallScale;
 	public float SmallBallScale;
@@ -93,6 +96,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2Obj.transform.localScale = medballscale;
 				ball1.type = SizeType.MediumBall;
 				ball2.type = SizeType.MediumBall;
+				ball1.LargeScoreValue = MedScoreValue;
+				ball2.LargeScoreValue = MedScoreValue;
 
 
 			}
@@ -102,6 +107,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2Obj.transform.localScale = smallballscale;
 				ball1.type = SizeType.SmallBall;
 				ball2.type = SizeType.SmallBall;
+				ball1.LargeScoreValue = SmallScoreValue;
+				ball2.LargeScoreValue = SmallScoreValue;
 
 
 			}
@@ -117,6 +124,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D blip){
 		if (blip.gameObject.tag == "Projectile") {
+			ScoreManager.Score += LargeScoreValue;
 			HandleSplit ();
 		}
 	}
