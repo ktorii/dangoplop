@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public float groundYPosition;
 	public GameObject Projectile;
 	private Transform ProjectilePos;
-	public float fireRate = 0.5F;
-	private float nextFire = 0.0F;
+	public int Ammo = 3;
     public Animator anim;
 
 	void Start() {
@@ -40,8 +39,8 @@ public class PlayerController : MonoBehaviour {
 		if(moveHorizontal > maxHorizontalSpeed) {
 			moveHorizontal = maxHorizontalSpeed;
 		}
-		if (Input.GetKeyDown (KeyCode.Space) && Time.time > nextFire) {
-			nextFire = Time.time + fireRate;
+		if (Input.GetKeyDown (KeyCode.Space) && Ammo > 0) {
+			Ammo--;
 			Fire ();
 		}
 
