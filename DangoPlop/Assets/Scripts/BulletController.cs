@@ -22,15 +22,13 @@ public class BulletController : MonoBehaviour {
 		
 
 	void OnTriggerEnter2D(Collider2D target){
-		if (target.gameObject.CompareTag ("Ceiling")) {
-			Destroy (gameObject);
-
-		} else if (target.gameObject.CompareTag ("Ball")) {
+		if (target.gameObject.CompareTag ("Ceiling") || target.gameObject.CompareTag ("Ball") ) {
 			GameObject PlayerControl = GameObject.Find ("Player");
 			PlayerController ammo = PlayerControl.GetComponent<PlayerController>();
 			Destroy (gameObject);
 			ammo.Ammo++;
-		}
+
+		} 
 			
 	}
 		
