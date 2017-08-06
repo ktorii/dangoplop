@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+	private bool isGameRunning = false;
+
 	void Start () {
 	}
 
 	void Update () {
+		UpdateGameState();
+
 		if (Input.GetKeyDown (KeyCode.R)) {
 			Application.LoadLevel (Application.loadedLevel);
+		} else if (Input.GetKeyDown (KeyCode.P)) {
+			TogglePause();
 		}
 	}
 
@@ -17,6 +23,18 @@ public class GameController : MonoBehaviour {
 	}
 
 	void UpdateScore() {
+	}
+
+	void UpdateGameState() {
+		if( isGameRunning ) {
+			Time.timeScale = 1.0f;
+		} else {
+			Time.timeScale = 0.0f;
+		}
+	}
+
+	void TogglePause() {
+		isGameRunning = !isGameRunning;
 	}
 
 }
