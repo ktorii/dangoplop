@@ -35,6 +35,6 @@ public class GameController : MonoBehaviour {
 
 	void TogglePause() {
 		isGameRunning = !isGameRunning;
+		FindObjectOfType<GamePausedOverlay>().SetPause(!isGameRunning);
 	}
-
 }
