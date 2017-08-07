@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 		ProjectilePos = transform.Find("ProjectilePos");
         anim = GetComponent<Animator>();
+		anim.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 	void FixedUpdate() {
 
