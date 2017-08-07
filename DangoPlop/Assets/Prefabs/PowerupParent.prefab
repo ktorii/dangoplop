@@ -106,6 +106,10 @@ MonoBehaviour:
   timeLandedToDestroy: 2
   groundYPosition: 0.3
   verticalSpeed: 2
+  powerupExplosion: {fileID: 1373985343339942, guid: f989474e11aa74082b243f06fdef7afc,
+    type: 2}
+  powerupGlow: {fileID: 1374429659103120, guid: 5635a64fa82454042addfa93354b19b0,
+    type: 2}
 --- !u!212 &212120804139781696
 SpriteRenderer:
   m_ObjectHideFlags: 1

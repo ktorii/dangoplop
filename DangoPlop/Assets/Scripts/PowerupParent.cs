@@ -11,6 +11,8 @@ public class PowerupParent : MonoBehaviour {
 	public float timeLandedToDestroy = 3;
 	public float groundYPosition;
 	public float verticalSpeed;
+	public GameObject powerupExplosion;
+	public GameObject powerupGlow;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +34,8 @@ public class PowerupParent : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag == playerTag){
 			print("powerup collision detected");
+			Instantiate (powerupExplosion, transform.position, transform.rotation);
+			Instantiate (powerupGlow, other.transform.position, other.transform.rotation);
 			Destroy(gameObject);
 		} else if (other.tag == ballTag) {
 			Physics2D.IgnoreCollision(other, GetComponent<Collider2D>());

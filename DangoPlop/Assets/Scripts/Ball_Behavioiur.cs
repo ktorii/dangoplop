@@ -32,10 +32,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public float Ball1TranslateY;
 	public float Ball2TranslateY;
 	public bool GameStart = true;
-
-
-
-
+	public GameObject ballExplosion;
 
     // Use this for initialization
     void Start () {
@@ -45,10 +42,7 @@ public class Ball_Behavioiur : MonoBehaviour {
         rb.AddForce(Vector2.right * thrust);
 		
 	}
-
-
 		
-
 	// Update is called once per frame
 	void Update () {
         circle.isTrigger = false;
@@ -70,6 +64,9 @@ public class Ball_Behavioiur : MonoBehaviour {
         }
     }
 
+	private void BallExplosion() {
+		Instantiate (ballExplosion, transform.position, transform.rotation);
+	}
 
 	void HandleSplit(){
 		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
@@ -126,6 +123,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 		if (blip.gameObject.tag == "Projectile") {
 			ScoreManager.Score += LargeScoreValue;
 			HandleSplit ();
+			BallExplosion ();
 		}
 	}
 }
