@@ -1951,7 +1951,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press P to unpause
+  m_Text: Press P to unpause/start
 --- !u!222 &2020510583
 CanvasRenderer:
   m_ObjectHideFlags: 0
