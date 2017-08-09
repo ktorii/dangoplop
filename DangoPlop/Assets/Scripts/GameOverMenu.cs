@@ -42,6 +42,8 @@ public class GameOverMenu : MonoBehaviour {
     public void Restart()
     {
         SceneManager.LoadScene("GamePlay");
+        Ball_Spawn.count = 0;
+        Debug.Log(Ball_Spawn.count);
         Time.timeScale = 1;
 
     }
@@ -49,6 +51,7 @@ public class GameOverMenu : MonoBehaviour {
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        Ball_Spawn.count = 0;
         Time.timeScale = 1;
     }
 }

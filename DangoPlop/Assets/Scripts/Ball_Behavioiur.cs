@@ -33,6 +33,10 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public float Ball2TranslateY;
 	public bool GameStart = true;
 	public GameObject ballExplosion;
+    public Vector2 position;
+    public double maxHeight;
+    public bool entered;
+    
 
     // Use this for initialization
     void Start () {
@@ -40,8 +44,10 @@ public class Ball_Behavioiur : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         circle = GetComponent<CircleCollider2D>();
         rb.AddForce(Vector2.right * thrust);
-		
-	}
+        position = rb.transform.position;
+        entered = false;
+
+    }
 		
 	// Update is called once per frame
 	void Update () {
@@ -50,10 +56,21 @@ public class Ball_Behavioiur : MonoBehaviour {
 		if (GameStart == true) {
 			Ball.transform.localScale = largeballscale;
 			GameStart = false;
-		} 
+		}
+
+        position = rb.transform.position;
+        if (position.y <= maxHeight)
+        {
+            entered = true;
+        }
+        if (entered && position.y >= maxHeight)
+        {
+            rb.AddForce(Vector2.down * 9);
+
+        }
 
 
-	}
+    }
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
@@ -95,9 +112,11 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.type = SizeType.MediumBall;
 				ball1.LargeScoreValue = MedScoreValue;
 				ball2.LargeScoreValue = MedScoreValue;
+                ball1.mediumHeight();
+                ball2.mediumHeight();
 
 
-			}
+            }
 
 			else if (type == SizeType.MediumBall) {
 				ball1Obj.transform.localScale = smallballscale;
@@ -106,9 +125,11 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.type = SizeType.SmallBall;
 				ball1.LargeScoreValue = SmallScoreValue;
 				ball2.LargeScoreValue = SmallScoreValue;
+                ball1.smallHeight();
+                ball2.smallHeight();
 
 
-			}
+            }
 
 		}
 		if (Projectile == true) {
@@ -126,4 +147,31 @@ public class Ball_Behavioiur : MonoBehaviour {
 			BallExplosion ();
 		}
 	}
+
+    private void OnDestroy()
+    {
+        if (type == SizeType.SmallBall)
+        {
+            Ball_Spawn.smallDeathCount++;
+        }
+        if (Ball_Spawn.smallDeathCount == 4)
+        {
+            Ball_Spawn.count--;
+            Ball_Spawn.smallDeathCount = 0;
+        }
+    }
+
+    public void mediumHeight()
+    {
+        maxHeight = -1;
+    }
+    public void smallHeight()
+    {
+        maxHeight = -2;
+    }
+
+    public void speedChange(int newSpeed)
+    {
+        thrust = newSpeed;
+    }
 }

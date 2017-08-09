@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour {
 
 		rb2d.velocity = new Vector2 (moveHorizontal, rb2d.velocity.y);
 
+        anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             anim.SetInteger("State", 0);
@@ -55,6 +57,12 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKey(KeyCode.RightArrow))
         {
             anim.SetInteger("State", 1);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            anim.SetBool("Shot", true);
+            StartCoroutine(Wait());
         }
     }
 	void Fire(){
@@ -68,6 +76,12 @@ public class PlayerController : MonoBehaviour {
         {
            FindObjectOfType<GameOverMenu>().EndGame();
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("Shot", false);
     }
 
 
