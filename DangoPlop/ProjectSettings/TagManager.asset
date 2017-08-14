@@ -9,6 +9,7 @@ TagManager:
   - Powerup
   - Projectile
   - Ceiling
+  - PowerupPanel
   layers:
   - Default
   - TransparentFX
