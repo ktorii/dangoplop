@@ -16,7 +16,7 @@ public enum SizeType
 public class Ball_Behavioiur : MonoBehaviour {
     private GameObject player;
     private Rigidbody2D rb;
-    public int thrust;
+    public static int thrust;
     private CircleCollider2D circle;
 	public GameObject Ball;
 	private GameObject Projectile;
@@ -35,7 +35,10 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public GameObject ballExplosion;
     public Vector2 position;
     public double maxHeight;
-    public bool entered;
+    public double sHeight;
+    public double mHeight;
+    public double lHeight;
+	public Vector2 newSpeed;
     
 
     // Use this for initialization
@@ -45,7 +48,12 @@ public class Ball_Behavioiur : MonoBehaviour {
         circle = GetComponent<CircleCollider2D>();
         rb.AddForce(Vector2.right * thrust);
         position = rb.transform.position;
-        entered = false;
+		if (type == SizeType.LargeBall) {
+			maxHeight = lHeight;
+		}
+		newSpeed.Set (0,0);
+			
+        
 
     }
 		
@@ -59,16 +67,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 		}
 
         position = rb.transform.position;
-        if (position.y <= maxHeight)
-        {
-            entered = true;
-        }
-        if (entered && position.y >= maxHeight)
-        {
-            rb.AddForce(Vector2.down * 9);
-
-        }
-
 
     }
 
@@ -77,8 +75,14 @@ public class Ball_Behavioiur : MonoBehaviour {
         if (coll.gameObject.tag == "Ball")
         {
             circle.isTrigger = true;
-
         }
+
+		if (coll.gameObject.tag == "Bottom") {
+			newSpeed.Set((float)rb.velocity.x,  Mathf.Sqrt ((float)(2 * 9.8 * (maxHeight - (-2.55)))));
+			rb.velocity = newSpeed;
+			Debug.Log (newSpeed.y);
+			Debug.Log (rb.velocity);
+		}
     }
 
 	private void BallExplosion() {
@@ -152,26 +156,27 @@ public class Ball_Behavioiur : MonoBehaviour {
     {
         if (type == SizeType.SmallBall)
         {
-            Ball_Spawn.smallDeathCount++;
+            Ball_Factory.smallDeathCount++;
         }
-        if (Ball_Spawn.smallDeathCount == 4)
+        if (Ball_Factory.smallDeathCount == 4)
         {
-            Ball_Spawn.count--;
-            Ball_Spawn.smallDeathCount = 0;
+            Ball_Factory.count--;
+            Ball_Factory.smallDeathCount = 0;
         }
     }
+
+	public void largeHeight()
+	{
+		maxHeight = lHeight;
+	}
 
     public void mediumHeight()
     {
-        maxHeight = -1;
+        maxHeight = mHeight;
     }
     public void smallHeight()
     {
-        maxHeight = -2;
+        maxHeight = sHeight;
     }
 
-    public void speedChange(int newSpeed)
-    {
-        thrust = newSpeed;
-    }
 }

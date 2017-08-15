@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ball_Spawn : MonoBehaviour {
+public class Ball_Factory : MonoBehaviour {
 
     public GameObject ball;
     public GameObject spawnPos;
@@ -13,19 +13,27 @@ public class Ball_Spawn : MonoBehaviour {
     public static int count;
     public static int smallDeathCount;
     private int targetScore;
+    public int scoreIncrement;
     private bool notInLoop;
+    public int rangeStart;
+    public int rangeEnd;
+    private int randomSpeed;
+
+
 
     // Use this for initialization
     void Start () {
         count = 0;
         smallDeathCount = 0;
         StartCoroutine(SpawnWaves());
-        targetScore = 1000;
-        notInLoop = false;
+        targetScore = scoreIncrement;
+        notInLoop = false;    
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         if (count < maxBalls && notInLoop)
         {
             StartCoroutine(SpawnWaves());
@@ -34,17 +42,20 @@ public class Ball_Spawn : MonoBehaviour {
         if (ScoreManager.Score >= targetScore)
         {
             maxBalls++;
-            targetScore += 1000;
+            targetScore += scoreIncrement;
         }
         
+
     }
 
     IEnumerator SpawnWaves()
     {
         notInLoop = false;
         random = (int)(Random.Range(0, 2));
+        randomSpeed = (int)(Random.Range(rangeStart, rangeEnd));
+        Ball_Behavioiur.thrust = randomSpeed;
         if (random == 0)
-        {          
+        {			
             Instantiate(ball, spawnPos.transform.position, transform.rotation);
         }
         else

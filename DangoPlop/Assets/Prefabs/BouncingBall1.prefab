@@ -88,7 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b5097cebbaa46678402f48697b68ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 200
   Ball: {fileID: 1124136323892240}
   LargeScoreValue: 10
   MedScoreValue: 20
@@ -103,6 +102,12 @@ MonoBehaviour:
   GameStart: 1
   ballExplosion: {fileID: 1143983903403302, guid: 316ade966c0b245bc842c2d31d621c08,
     type: 2}
+  position: {x: 0, y: 0}
+  maxHeight: 0
+  sHeight: -1
+  mHeight: 0
+  lHeight: 1
+  newSpeed: {x: 0, y: 0}
 --- !u!212 &212549549033552714
 SpriteRenderer:
   m_ObjectHideFlags: 1

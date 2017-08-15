@@ -15,6 +15,7 @@ public class GameOverMenu : MonoBehaviour {
         GameOverUI.SetActive(false);
         dead = false;
         Time.timeScale = 1;
+        
         		
 	}
 	
@@ -42,8 +43,8 @@ public class GameOverMenu : MonoBehaviour {
     public void Restart()
     {
         SceneManager.LoadScene("GamePlay");
-        Ball_Spawn.count = 0;
-        Debug.Log(Ball_Spawn.count);
+        Ball_Factory.count = 0;
+        Debug.Log(Ball_Factory.count);
         Time.timeScale = 1;
 
     }
@@ -51,7 +52,7 @@ public class GameOverMenu : MonoBehaviour {
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
-        Ball_Spawn.count = 0;
+        Ball_Factory.count = 0;
         Time.timeScale = 1;
     }
 }
