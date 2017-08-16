@@ -9,7 +9,7 @@ TagManager:
   - Powerup
   - Projectile
   - Ceiling
-  - Bottom
+  - Ground
   layers:
   - Default
   - TransparentFX

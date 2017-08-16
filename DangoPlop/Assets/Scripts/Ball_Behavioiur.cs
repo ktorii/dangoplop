@@ -39,6 +39,8 @@ public class Ball_Behavioiur : MonoBehaviour {
     public double mHeight;
     public double lHeight;
 	public Vector2 newSpeed;
+	private GameObject ground;
+	private double distance;
     
 
     // Use this for initialization
@@ -52,6 +54,9 @@ public class Ball_Behavioiur : MonoBehaviour {
 			maxHeight = lHeight;
 		}
 		newSpeed.Set (0,0);
+		ground = GameObject.FindGameObjectWithTag ("Ground");
+		BoxCollider2D thickness = ground.GetComponent<BoxCollider2D> ();
+		distance = maxHeight-(ground.transform.position.y + (thickness.size.y/2));
 			
         
 
@@ -77,11 +82,9 @@ public class Ball_Behavioiur : MonoBehaviour {
             circle.isTrigger = true;
         }
 
-		if (coll.gameObject.tag == "Bottom") {
-			newSpeed.Set((float)rb.velocity.x,  Mathf.Sqrt ((float)(2 * 9.8 * (maxHeight - (-2.55)))));
+		if (coll.gameObject.tag == "Ground") {
+			newSpeed.Set((float)rb.velocity.x,  Mathf.Sqrt ((float)(2 * 9.8 * distance)));
 			rb.velocity = newSpeed;
-			Debug.Log (newSpeed.y);
-			Debug.Log (rb.velocity);
 		}
     }
 
