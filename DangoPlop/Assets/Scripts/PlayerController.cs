@@ -14,11 +14,19 @@ public class PlayerController : MonoBehaviour {
 	public int Ammo = 3;
     public Animator anim;
 
+	private Vector3 originalScale;
+	private float originalHeight;
+
+	private PowerupMaster powerupMaster;
+
 	void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
 		ProjectilePos = transform.Find("ProjectilePos");
         anim = GetComponent<Animator>();
 		anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+		originalScale = gameObject.transform.lossyScale;
+		originalHeight = gameObject.transform.position.y;
+		powerupMaster = GameObject.FindGameObjectWithTag ("PowerupPanel").GetComponent<PowerupMaster> ();
     }
 	void FixedUpdate() {
 
@@ -65,6 +73,7 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(Wait());
         }
     }
+
 	void Fire(){
 
 		Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
@@ -78,11 +87,17 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+	public Vector3 getOriginalScale() {
+		return originalScale;
+	}
+
+	public float getOriginalHeight() {
+		return originalHeight;
+	}
+	
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Shot", false);
     }
-
-
 }
