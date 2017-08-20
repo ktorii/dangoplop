@@ -16,7 +16,7 @@ public enum SizeType
 public class Ball_Behavioiur : MonoBehaviour {
     private GameObject player;
     private Rigidbody2D rb;
-    public int thrust;
+    public static int thrust;
     private CircleCollider2D circle;
 	public GameObject Ball;
 	private GameObject Projectile;
@@ -33,6 +33,15 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public float Ball2TranslateY;
 	public bool GameStart = true;
 	public GameObject ballExplosion;
+    public Vector2 position;
+    public double maxHeight;
+    public double sHeight;
+    public double mHeight;
+    public double lHeight;
+	public Vector2 newSpeed;
+	private GameObject ground;
+	private double distance;
+    
 
     // Use this for initialization
     void Start () {
@@ -40,8 +49,18 @@ public class Ball_Behavioiur : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         circle = GetComponent<CircleCollider2D>();
         rb.AddForce(Vector2.right * thrust);
-		
-	}
+        position = rb.transform.position;
+		if (type == SizeType.LargeBall) {
+			maxHeight = lHeight;
+		}
+		newSpeed.Set (0,0);
+		ground = GameObject.FindGameObjectWithTag ("Ground");
+		BoxCollider2D thickness = ground.GetComponent<BoxCollider2D> ();
+		distance = maxHeight-(ground.transform.position.y + (thickness.size.y/2));
+			
+        
+
+    }
 		
 	// Update is called once per frame
 	void Update () {
@@ -50,18 +69,23 @@ public class Ball_Behavioiur : MonoBehaviour {
 		if (GameStart == true) {
 			Ball.transform.localScale = largeballscale;
 			GameStart = false;
-		} 
+		}
 
+        position = rb.transform.position;
 
-	}
+    }
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Ball")
         {
             circle.isTrigger = true;
-
         }
+
+		if (coll.gameObject.tag == "Ground") {
+			newSpeed.Set((float)rb.velocity.x,  Mathf.Sqrt ((float)(2 * 9.8 * distance)));
+			rb.velocity = newSpeed;
+		}
     }
 
 	private void BallExplosion() {
@@ -95,9 +119,11 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.type = SizeType.MediumBall;
 				ball1.LargeScoreValue = MedScoreValue;
 				ball2.LargeScoreValue = MedScoreValue;
+                ball1.mediumHeight();
+                ball2.mediumHeight();
 
 
-			}
+            }
 
 			else if (type == SizeType.MediumBall) {
 				ball1Obj.transform.localScale = smallballscale;
@@ -106,9 +132,11 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.type = SizeType.SmallBall;
 				ball1.LargeScoreValue = SmallScoreValue;
 				ball2.LargeScoreValue = SmallScoreValue;
+                ball1.smallHeight();
+                ball2.smallHeight();
 
 
-			}
+            }
 
 		}
 		if (Projectile == true) {
@@ -126,4 +154,32 @@ public class Ball_Behavioiur : MonoBehaviour {
 			BallExplosion ();
 		}
 	}
+
+    private void OnDestroy()
+    {
+        if (type == SizeType.SmallBall)
+        {
+            Ball_Factory.smallDeathCount++;
+        }
+        if (Ball_Factory.smallDeathCount == 4)
+        {
+            Ball_Factory.count--;
+            Ball_Factory.smallDeathCount = 0;
+        }
+    }
+
+	public void largeHeight()
+	{
+		maxHeight = lHeight;
+	}
+
+    public void mediumHeight()
+    {
+        maxHeight = mHeight;
+    }
+    public void smallHeight()
+    {
+        maxHeight = sHeight;
+    }
+
 }
