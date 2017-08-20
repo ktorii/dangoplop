@@ -127,6 +127,7 @@ public class PowerupMaster : MonoBehaviour {
 			activePowerupTimeLimit = powerupLastingTime;
 		} else {
 			resetActivePowerupSpecs ();
+			stopShowingPowerup();
 		}
 	}
 
