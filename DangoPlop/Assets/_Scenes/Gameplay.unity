@@ -874,6 +874,7 @@ MonoBehaviour:
   Projectile: {fileID: 1586496687571340, guid: 7581da431127f482e8c9983564451106, type: 2}
   Laser: {fileID: 1079573688853542, guid: 3f000830fc1bc4f03bd689f0e8e4cde9, type: 2}
   Ammo: 3
+  currentDoubleShotAmmo: 0
   anim: {fileID: 0}
   FireRate: 0
   DoubleShotRate: 0.5

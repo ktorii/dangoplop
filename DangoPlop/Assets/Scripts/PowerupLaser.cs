@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RapidFire : PowerupParent {
+public class PowerupLaser : PowerupParent {
 	public override void HandlePowerupAction(float powerupLastingTime){
-		powerupMaster.startPowerupAction (PowerupType.Rapidfire, powerupLastingTime);
+		powerupMaster.startPowerupAction (PowerupType.Laser, powerupLastingTime);
 	}
 }

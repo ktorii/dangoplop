@@ -112,6 +112,7 @@ MonoBehaviour:
   powerupGlow: {fileID: 1374429659103120, guid: 5635a64fa82454042addfa93354b19b0,
     type: 2}
   timeLastingPowerup: 4
+  limitDoubleShotAmmo: 5
 --- !u!212 &212769951754832458
 SpriteRenderer:
   m_ObjectHideFlags: 1

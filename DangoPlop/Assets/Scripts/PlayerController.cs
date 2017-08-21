@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject Laser;
 	private Transform ProjectilePos;
 	public int Ammo = 3;
+	public float currentDoubleShotAmmo;
     public Animator anim;
 	private Vector3 originalScale;
 	private float originalHeight;
@@ -70,7 +71,6 @@ public class PlayerController : MonoBehaviour {
 
 	
 		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire) {
-			Ammo--;
 			Fire ();
 		}
 
@@ -111,10 +111,14 @@ public class PlayerController : MonoBehaviour {
 		if (bulletType == BulletType.DefaultFire) {
 			nextFire = Time.time + FireRate;
 			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
-		} else if (bulletType == BulletType.Laser) {
+			Ammo--;
+		} 
+		if (bulletType == BulletType.Laser) {
 			nextFire = Time.time + LaserRate;
 			Instantiate (Laser, ProjectilePos.position, Quaternion.identity);
-		} else if (bulletType == BulletType.DoubleShot) {
+			Ammo--;
+		} 
+		if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
 			nextFire = Time.time + DoubleShotRate;
 			Vector2 temp = ProjectilePos.transform.position;
 			Vector2 temp1 = ProjectilePos.transform.position;
@@ -124,10 +128,11 @@ public class PlayerController : MonoBehaviour {
 			doubleShot2.transform.Translate (FirstBulletTranslateX, FirstBulletTranslateY, 0, Space.World);
 			doubleShot1.transform.position = temp;
 			doubleShot1.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
-		} else if (bulletType == BulletType.RapidFire) {
+			currentDoubleShotAmmo--;
+		} 
+		if (bulletType == BulletType.RapidFire) {
 			nextFire = Time.time + FireRate;
 			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
-			Ammo++;
 
 		}
 	}
@@ -156,8 +161,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void defaultFire(){
-		AmmoReset = true;
 		bulletType = BulletType.DefaultFire;
+		AmmoReset = true;
+
 	}
 	
     IEnumerator Wait()
