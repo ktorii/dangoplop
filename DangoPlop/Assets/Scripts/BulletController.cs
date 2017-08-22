@@ -29,7 +29,7 @@ public class BulletController : MonoBehaviour {
 			if (ammo.bulletType == BulletType.DoubleShot) {
 				ammo.currentDoubleShotAmmo++;
 			}
-			if (ammo.bulletType == BulletType.DefaultFire) {
+			if (ammo.bulletType == BulletType.DefaultFire||ammo.bulletType == BulletType.RapidFire) {
 				ammo.Ammo++;
 			}
 			Destroy (gameObject);

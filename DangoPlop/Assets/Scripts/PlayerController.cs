@@ -113,12 +113,12 @@ public class PlayerController : MonoBehaviour {
 			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
 			Ammo--;
 		} 
-		if (bulletType == BulletType.Laser) {
+		else if (bulletType == BulletType.Laser) {
 			nextFire = Time.time + LaserRate;
 			Instantiate (Laser, ProjectilePos.position, Quaternion.identity);
 			Ammo--;
 		} 
-		if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
+		else if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
 			nextFire = Time.time + DoubleShotRate;
 			Vector2 temp = ProjectilePos.transform.position;
 			Vector2 temp1 = ProjectilePos.transform.position;
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour {
 			doubleShot1.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
 			currentDoubleShotAmmo--;
 		} 
-		if (bulletType == BulletType.RapidFire) {
+		else if (bulletType == BulletType.RapidFire) {
 			nextFire = Time.time + FireRate;
 			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
 

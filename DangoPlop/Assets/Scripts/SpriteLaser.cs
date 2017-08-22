@@ -500,7 +500,9 @@ namespace TwoDLaserPack
 			
 		if (hitInfo.collider.tag == "Ball" && isTriggered == false)
 			{	
-				
+				GameObject player = GameObject.FindGameObjectWithTag ("Player");
+				PlayerController ammo = player.GetComponent<PlayerController> ();
+				ammo.Ammo++;
 				ballObject = hitInfo.collider.gameObject;
 				ballController = ballObject.GetComponent<Ball_Behavioiur> ();
 				ballController.HandleSplit ();
