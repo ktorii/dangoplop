@@ -92,7 +92,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 		Instantiate (ballExplosion, transform.position, transform.rotation);
 	}
 
-	void HandleSplit(){
+	public void HandleSplit(){
 		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
 
 		if (type != SizeType.SmallBall) {

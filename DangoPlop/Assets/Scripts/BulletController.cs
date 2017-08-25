@@ -6,8 +6,9 @@ public class BulletController : MonoBehaviour {
 
 	public Vector2 Speed;
 
-	Rigidbody2D rb;
-
+	protected Rigidbody2D rb;
+	protected GameObject PlayerControl;
+	protected PlayerController ammo;
 
 	// Use this for initialization
 	void Start () {
@@ -18,18 +19,19 @@ public class BulletController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		rb.velocity = Speed;
+		PlayerControl = GameObject.Find ("Player");
+		ammo = PlayerControl.GetComponent<PlayerController> ();
 	}
 		
 
-	void OnTriggerEnter2D(Collider2D target){
-		if (target.gameObject.CompareTag ("Ceiling") || target.gameObject.CompareTag ("Ball") ) {
-			GameObject PlayerControl = GameObject.Find ("Player");
-			PlayerController ammo = PlayerControl.GetComponent<PlayerController>();
+	public virtual void OnTriggerEnter2D(Collider2D target){
+		if (target.gameObject.CompareTag ("Ceiling") || target.gameObject.CompareTag ("Ball")) {
+			if (ammo.bulletType == BulletType.DefaultFire) {
+				ammo.Ammo++;
+			}
 			Destroy (gameObject);
-			ammo.Ammo++;
+		}
 
-		} 
-			
 	}
 		
 }
