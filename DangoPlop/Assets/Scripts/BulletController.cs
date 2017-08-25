@@ -6,9 +6,9 @@ public class BulletController : MonoBehaviour {
 
 	public Vector2 Speed;
 
-	Rigidbody2D rb;
-	private GameObject PlayerControl;
-	private PlayerController ammo;
+	protected Rigidbody2D rb;
+	protected GameObject PlayerControl;
+	protected PlayerController ammo;
 
 	// Use this for initialization
 	void Start () {
@@ -24,12 +24,9 @@ public class BulletController : MonoBehaviour {
 	}
 		
 
-	void OnTriggerEnter2D(Collider2D target){
+	public virtual void OnTriggerEnter2D(Collider2D target){
 		if (target.gameObject.CompareTag ("Ceiling") || target.gameObject.CompareTag ("Ball")) {
-			if (ammo.bulletType == BulletType.DoubleShot) {
-				ammo.currentDoubleShotAmmo++;
-			}
-			if (ammo.bulletType == BulletType.DefaultFire||ammo.bulletType == BulletType.RapidFire) {
+			if (ammo.bulletType == BulletType.DefaultFire) {
 				ammo.Ammo++;
 			}
 			Destroy (gameObject);

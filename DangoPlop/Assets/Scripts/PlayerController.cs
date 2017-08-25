@@ -19,17 +19,19 @@ public class PlayerController : MonoBehaviour {
 	public float baseJumpPower;
 	public float groundYPosition;
 	public GameObject Projectile;
+	public GameObject Projectile2;
 	public GameObject Laser;
 	private Transform ProjectilePos;
 	public int Ammo = 3;
 	public float currentDoubleShotAmmo;
+	public float maxDoubleShotAmmo;
     public Animator anim;
 	private Vector3 originalScale;
 	private float originalHeight;
 	public float FireRate = 0F;
 	public float DoubleShotRate = 0.5F;
 	public float LaserRate = 2F;
-	private float nextFire = 0.0F;
+	public float nextFire = 0.0F;
 	public float FirstBulletTranslateX = -0.3F;
 	public float FirstBulletTranslateY = 0F;
 	public float SecondBulletTranslateX = 0.3F;
@@ -120,24 +122,20 @@ public class PlayerController : MonoBehaviour {
 		} 
 		else if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
 			nextFire = Time.time + DoubleShotRate;
-			Vector2 temp = ProjectilePos.transform.position;
-			Vector2 temp1 = ProjectilePos.transform.position;
-			var doubleShot1 = Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
-			var doubleShot2 = Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
-			doubleShot2.transform.position = temp;
-			doubleShot2.transform.Translate (FirstBulletTranslateX, FirstBulletTranslateY, 0, Space.World);
-			doubleShot1.transform.position = temp;
-			doubleShot1.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
+			var doubleShot1 = Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
+			var doubleShot2 = Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
+			doubleShot1.transform.Translate (FirstBulletTranslateX, FirstBulletTranslateY, 0, Space.World);
+			doubleShot2.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
 			currentDoubleShotAmmo--;
 		} 
 		else if (bulletType == BulletType.RapidFire) {
 			nextFire = Time.time + FireRate;
-			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
+			Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
 
 		}
 	}
 
-	public Vector3 getOriginalScale() {
+	public Vector3 getOriginalScale() {	
 		return originalScale;
 	}
 
@@ -152,12 +150,12 @@ public class PlayerController : MonoBehaviour {
 
 	public void doubleShot(){
 		bulletType = BulletType.DoubleShot;
-		AmmoReset = false;
+		currentDoubleShotAmmo = maxDoubleShotAmmo;
+
 	}
 
 	public void rapidFire(){
 		bulletType = BulletType.RapidFire;
-		AmmoReset = false;
 	}
 
 	public void defaultFire(){

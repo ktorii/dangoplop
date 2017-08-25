@@ -12,8 +12,6 @@ public class PowerupParent : MonoBehaviour {
 	private GameObject ground;
 	private float groundYPosition;
 	public float verticalSpeed;
-	protected GameObject player;
-	protected PlayerController playerController;
 	public GameObject powerupExplosion;
 	public GameObject powerupGlow;
 	private float groundTimer = 0.0f;
@@ -31,8 +29,6 @@ public class PowerupParent : MonoBehaviour {
 		ground = GameObject.FindGameObjectWithTag ("Ground");
 		groundYPosition = ground.transform.position.y + (ground.GetComponent<BoxCollider2D> ().size.y/2);
 		print (groundYPosition);
-		player = GameObject.FindGameObjectWithTag ("Player");
-		playerController = player.GetComponent<PlayerController> ();
 	}
 
 	void FixedUpdate () 	{
