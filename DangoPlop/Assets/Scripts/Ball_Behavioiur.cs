@@ -16,6 +16,8 @@ public enum SizeType
 public class Ball_Behavioiur : MonoBehaviour {
     private GameObject player;
     private Rigidbody2D rb;
+	private Rigidbody2D ball1Speed;
+	private Rigidbody2D ball2Speed;
     public static int thrust;
     private CircleCollider2D circle;
 	public GameObject Ball;
@@ -48,7 +50,6 @@ public class Ball_Behavioiur : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
         circle = GetComponent<CircleCollider2D>();
-        rb.AddForce(Vector2.right * thrust);
         position = rb.transform.position;
 		if (type == SizeType.LargeBall) {
 			maxHeight = lHeight;
@@ -67,9 +68,11 @@ public class Ball_Behavioiur : MonoBehaviour {
         circle.isTrigger = false;
 		var largeballscale = new Vector3 (LargeBallScale, LargeBallScale, 1);
 		if (GameStart == true) {
+			rb.AddForce(Vector2.right * thrust);
 			Ball.transform.localScale = largeballscale;
 			GameStart = false;
 		}
+
 
         position = rb.transform.position;
 
@@ -101,8 +104,10 @@ public class Ball_Behavioiur : MonoBehaviour {
 			var ball2Obj = Instantiate (Ball);
 			Ball_Behavioiur ball1 = ball1Obj.GetComponent<Ball_Behavioiur> ();
 			Ball_Behavioiur ball2 = ball2Obj.GetComponent<Ball_Behavioiur> ();
-			ball1Obj.GetComponent<Rigidbody2D> ();
-			ball2Obj.GetComponent<Rigidbody2D> ();
+			ball1Speed = ball1Obj.GetComponent<Rigidbody2D> ();
+			ball2Speed = ball2Obj.GetComponent<Rigidbody2D> ();
+			ball1Speed.AddForce (Vector2.left * thrust);
+			ball2Speed.AddForce (Vector2.right * thrust);
 
 			Vector2 temp = transform.position;
 			ball1Obj.transform.position = temp;
@@ -121,6 +126,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = MedScoreValue;
                 ball1.mediumHeight();
                 ball2.mediumHeight();
+				
 
 
             }
@@ -134,7 +140,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = SmallScoreValue;
                 ball1.smallHeight();
                 ball2.smallHeight();
-
 
             }
 
