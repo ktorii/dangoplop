@@ -8,6 +8,8 @@ public class PowerupParent : MonoBehaviour {
 	static private string playerTag = "Player";
 	static private string ballTag = "Ball";
 	static private string projectileTag = "Projectile";
+	static private string ballLayerName = "Ball";
+	static private int ballLayerIndex;
 	public float timeLandedToDestroy = 3;
 	private GameObject ground;
 	private float groundYPosition;
@@ -29,6 +31,7 @@ public class PowerupParent : MonoBehaviour {
 		ground = GameObject.FindGameObjectWithTag ("Ground");
 		groundYPosition = ground.transform.position.y + (ground.GetComponent<BoxCollider2D> ().size.y/2);
 		print (groundYPosition);
+		ballLayerIndex = LayerMask.NameToLayer(ballLayerName);
 	}
 
 	void FixedUpdate () 	{
@@ -58,7 +61,7 @@ public class PowerupParent : MonoBehaviour {
 			// DESTROY the powerup
 			Destroy(gameObject);
 
-		} else if (other.tag == ballTag) {
+		} else if (other.tag == ballTag || other.gameObject.layer == ballLayerIndex) {
 			Physics2D.IgnoreCollision(other, GetComponent<Collider2D>());
 		} else if (other.tag == projectileTag) {
 			Physics2D.IgnoreCollision(other, GetComponent<Collider2D>());
