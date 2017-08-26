@@ -74,6 +74,9 @@ public class PlayerController : MonoBehaviour {
 	
 		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire) {
 			Fire ();
+			anim.SetBool("Shot", true);
+			StartCoroutine(Wait());
+
 		}
 
 		if (Ammo > 3 && AmmoReset == true) {
@@ -93,12 +96,7 @@ public class PlayerController : MonoBehaviour {
         {
             anim.SetInteger("State", 1);
         }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            anim.SetBool("Shot", true);
-            StartCoroutine(Wait());
-        }
+			
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -166,7 +164,7 @@ public class PlayerController : MonoBehaviour {
 	
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         anim.SetBool("Shot", false);
     }
 }

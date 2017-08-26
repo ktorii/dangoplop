@@ -42,6 +42,7 @@ public class Ball_Factory : MonoBehaviour {
         if (ScoreManager.Score >= targetScore)
         {
             maxBalls++;
+			spawnWait--;
             targetScore += scoreIncrement;
         }
         
