@@ -126,8 +126,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = MedScoreValue;
                 ball1.mediumHeight();
                 ball2.mediumHeight();
-				ball1Speed.AddForce (Vector2.left * thrust);
-				ball2Speed.AddForce (Vector2.right * thrust);
 				
 
 
@@ -142,9 +140,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = SmallScoreValue;
                 ball1.smallHeight();
                 ball2.smallHeight();
-				ball1Speed.AddForce (Vector2.left * thrust);
-				ball2Speed.AddForce (Vector2.right * thrust);
-
 
             }
 
