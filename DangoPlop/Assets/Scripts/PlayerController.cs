@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space) && Ammo > 0) {
 			Ammo--;
 			Fire ();
+			anim.SetBool("Shot", true);
+			StartCoroutine(Wait());
+
 		}
 
 		rb2d.velocity = new Vector2 (moveHorizontal, rb2d.velocity.y);
@@ -66,12 +69,7 @@ public class PlayerController : MonoBehaviour {
         {
             anim.SetInteger("State", 1);
         }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            anim.SetBool("Shot", true);
-            StartCoroutine(Wait());
-        }
+			
     }
 
 	void Fire(){
@@ -97,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 	
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         anim.SetBool("Shot", false);
     }
 }
