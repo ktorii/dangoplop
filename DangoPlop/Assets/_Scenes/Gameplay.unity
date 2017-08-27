@@ -887,7 +887,7 @@ MonoBehaviour:
   FirstBulletTranslateY: 0
   SecondBulletTranslateX: 0.3
   SecondBulletTranslateY: 0
-  bulletType: 3
+  bulletType: 0
   AmmoReset: 0
   Froze: 0
 --- !u!50 &1112566740
