@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
 	public float SecondBulletTranslateY = 0F;
 	public BulletType bulletType = BulletType.DefaultFire;
 	public bool AmmoReset = false;
+	public bool Froze;
 
 	private PowerupMaster powerupMaster;
 
@@ -96,6 +97,10 @@ public class PlayerController : MonoBehaviour {
         {
             anim.SetInteger("State", 1);
         }
+
+		if (Froze) {
+			speedScale = 0;
+		}
 			
     }
 
@@ -165,6 +170,12 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.3f);
+		if (bulletType == BulletType.Laser) {
+			Froze = true;
+			yield return new WaitForSeconds (2f);
+			speedScale = 4;
+			Froze = false;
+		}
         anim.SetBool("Shot", false);
     }
 }
