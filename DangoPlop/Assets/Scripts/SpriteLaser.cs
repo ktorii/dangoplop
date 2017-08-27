@@ -262,11 +262,10 @@ namespace TwoDLaserPack
 
 		void Update()
         {	
-			var player = GameObject.Find ("Player");
 			var invisibleTarget = GameObject.Find ("InvisibleTarget");
-			invisibleTarget.transform.position = player.transform.position + player.transform.up * 3f;
+			invisibleTarget.transform.position = ProjectilePos.transform.position + ProjectilePos.transform.up * 3f;
 			targetGo = invisibleTarget;
-			wayPointPos = new Vector3(ProjectilePos.transform.position.x, transform.position.y,ProjectilePos.transform.position.z);
+			wayPointPos = new Vector3(ProjectilePos.transform.position.x, ProjectilePos.transform.position.y,ProjectilePos.transform.position.z);
 			transform.position = Vector3.MoveTowards(transform.position, wayPointPos, speed * Time.deltaTime);
 			allLasersInScene.OnLaserHitTriggered += LaserOnOnLaserHitTriggered;
 			allLasersInScene.SetLaserState (true);

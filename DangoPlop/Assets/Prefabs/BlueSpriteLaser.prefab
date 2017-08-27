@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee8f3134faab49e68c584944c58f255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTimeLimit: 4
+  lifeTimeLimit: 2
 --- !u!114 &114578098137813612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,9 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a4ca2b46880d43a38895ea365b0e06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserStartPiece: {fileID: 164508, guid: bbc643ad128e1dd43a449cf8b082ec43, type: 2}
-  laserMiddlePiece: {fileID: 197988, guid: 0baf4b15796c0414892afeae1853da66, type: 2}
-  laserEndPiece: {fileID: 116062, guid: 172f93813705c3244b45a239fb0d4332, type: 2}
+  laserStartPiece: {fileID: 1340508489265924, guid: 6e744e0f9f2424e08b528360c294fdf6,
+    type: 2}
+  laserMiddlePiece: {fileID: 1248503430848446, guid: 15e6ee036ba7549c097bc05ab7c52dc9,
+    type: 2}
+  laserEndPiece: {fileID: 1630043661354598, guid: 1944b198f6c3145799792f93b8bf7644,
+    type: 2}
   laserLineRendererArc: {fileID: 120577651512485874}
   laserArcSegments: 20
   laserOscillationPositionerScript: {fileID: 114367168067194958}
@@ -190,7 +193,7 @@ MonoBehaviour:
   laserRotationEnabled: 1
   lerpLaserRotation: 0
   turningRate: 3
-  collisionTriggerInterval: 0.25
+  collisionTriggerInterval: 0.2
   mask:
     serializedVersion: 2
     m_Bits: 256

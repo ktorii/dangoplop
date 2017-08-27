@@ -635,11 +635,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4314887113946742, guid: 0f608b6a26206430b8db2481da1fd5ee, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 4314887113946742, guid: 0f608b6a26206430b8db2481da1fd5ee, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.53
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: 4314887113946742, guid: 0f608b6a26206430b8db2481da1fd5ee, type: 2}
       propertyPath: m_LocalPosition.z
@@ -887,8 +887,9 @@ MonoBehaviour:
   FirstBulletTranslateY: 0
   SecondBulletTranslateX: 0.3
   SecondBulletTranslateY: 0
-  bulletType: 0
+  bulletType: 3
   AmmoReset: 0
+  Froze: 0
 --- !u!50 &1112566740
 Rigidbody2D:
   serializedVersion: 4
