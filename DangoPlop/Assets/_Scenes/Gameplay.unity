@@ -723,7 +723,7 @@ MonoBehaviour:
   ball: {fileID: 1124136323892240, guid: ccd7ec6a0e3a2b148a81dffc38db316f, type: 2}
   spawnPos: {fileID: 146897846}
   spawnPos2: {fileID: 1690408493}
-  maxBalls: 1
+  maxBalls: 5
   spawnWait: 5
   scoreIncrement: 1000
   rangeStart: 100
@@ -879,9 +879,9 @@ MonoBehaviour:
   currentDoubleShotAmmo: 0
   maxDoubleShotAmmo: 3
   anim: {fileID: 0}
-  FireRate: 0
+  FireRate: 0.1
   DoubleShotRate: 0.5
-  LaserRate: 0
+  LaserRate: 2
   nextFire: 0
   FirstBulletTranslateX: -0.3
   FirstBulletTranslateY: 0
