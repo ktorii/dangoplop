@@ -53,8 +53,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4686639579212742}
-  - component: {fileID: 114367168067194958}
   - component: {fileID: 212190427715081638}
+  - component: {fileID: 114388562520251266}
   m_Layer: 0
   m_Name: PositionMover
   m_TagString: Untagged
@@ -133,7 +133,7 @@ Transform:
   m_Father: {fileID: 4073272852370426}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114367168067194958
+--- !u!114 &114388562520251266
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1739159064596166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 098014595787b064bbdfd1ba29ff4ef9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6faacd3d0b5b34c4baf2d074bd1b8ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pickerInterval: 0.2
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee8f3134faab49e68c584944c58f255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTimeLimit: 2
+  laserRate: 2
 --- !u!114 &114578098137813612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -179,7 +179,7 @@ MonoBehaviour:
     type: 2}
   laserLineRendererArc: {fileID: 120577651512485874}
   laserArcSegments: 20
-  laserOscillationPositionerScript: {fileID: 114367168067194958}
+  laserOscillationPositionerScript: {fileID: 0}
   oscillateLaser: 0
   maxLaserLength: 50
   oscillationSpeed: 1
