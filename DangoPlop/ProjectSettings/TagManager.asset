@@ -11,6 +11,8 @@ TagManager:
   - Ceiling
   - PowerupPanel
   - Ground
+  - SpawnOne
+  - SpawnTwo
   layers:
   - Default
   - TransparentFX

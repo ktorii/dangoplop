@@ -226,8 +226,7 @@ public class PowerupMaster : MonoBehaviour {
 	}
 
 	private void explosion(){
-		GameObject[] objects = GameObject.FindGameObjectsWithTag ("Ball");
-		foreach (GameObject obj in objects) {
+		foreach (GameObject obj in Ball_Factory.balls) {
 			Ball_Behavioiur split = obj.GetComponent<Ball_Behavioiur> ();
 			split.HandleSplit ();
 			Destroy (obj);

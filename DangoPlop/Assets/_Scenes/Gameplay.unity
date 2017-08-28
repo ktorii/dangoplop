@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 146897847}
   m_Layer: 0
   m_Name: SpawnPos
-  m_TagString: Untagged
+  m_TagString: SpawnOne
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,6 +708,7 @@ MonoBehaviour:
   scoreIncrement: 1000
   rangeStart: 100
   rangeEnd: 200
+  SpawnHeight: 0
 --- !u!1 &1092480767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,7 +1611,7 @@ GameObject:
   - component: {fileID: 1690408494}
   m_Layer: 0
   m_Name: SpawnPos2
-  m_TagString: Untagged
+  m_TagString: SpawnTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
