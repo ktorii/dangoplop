@@ -39,12 +39,12 @@ public class PlayerController : MonoBehaviour {
 	public BulletType bulletType = BulletType.DefaultFire;
 	public bool AmmoReset = false;
 	public bool Froze;
-
 	private PowerupMaster powerupMaster;
 
 	void Start() {
+		
 		rb2d = GetComponent<Rigidbody2D> ();
-		ProjectilePos = transform.Find("ProjectilePos");
+		ProjectilePos = transform.Find ("ProjectilePos");
         anim = GetComponent<Animator>();
 		anim.updateMode = AnimatorUpdateMode.UnscaledTime;
 		originalScale = gameObject.transform.lossyScale;
@@ -171,8 +171,9 @@ public class PlayerController : MonoBehaviour {
     {
         yield return new WaitForSeconds(0.3f);
 		if (bulletType == BulletType.Laser) {
+			DestroyByTime LaserTime = GameObject.FindGameObjectWithTag ("Projectile").GetComponent<DestroyByTime> ();
 			Froze = true;
-			yield return new WaitForSeconds (2f);
+			yield return new WaitForSeconds (LaserRate = LaserTime.laserRate);
 			speedScale = 4;
 			Froze = false;
 		}
