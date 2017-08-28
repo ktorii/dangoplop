@@ -41,8 +41,11 @@ public class Ball_Behavioiur : MonoBehaviour {
     public double mHeight;
     public double lHeight;
 	public Vector2 newSpeed;
+	public Vector2 newSideSpeed;
+	public float previousSpeed;
 	private GameObject ground;
 	private double distance;
+
     
 
     // Use this for initialization
@@ -186,5 +189,21 @@ public class Ball_Behavioiur : MonoBehaviour {
     {
         maxHeight = sHeight;
     }
+
+	public void stop(){
+		previousSpeed = rb.velocity.x;
+		rb.velocity = Vector2.zero;
+		rb.isKinematic = true;
+
+	}
+	public void resume(){
+		rb.isKinematic = false;
+		newSideSpeed.Set (previousSpeed, 0.0f);
+		rb.velocity = newSideSpeed;
+	}
+
+
+
+
 
 }

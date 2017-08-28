@@ -77,5 +77,11 @@ public class Ball_Factory : MonoBehaviour {
 
 
     }
+	public int rangeOne(){
+		return rangeStart;
+	}
+	public int rangeTwo(){
+		return rangeEnd;
+	}
 
 }
