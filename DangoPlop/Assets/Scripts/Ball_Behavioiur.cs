@@ -43,6 +43,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public Vector2 newSpeed;
 	private GameObject ground;
 	private double distance;
+	private Ball_Factory ballFactory;
     
 
     // Use this for initialization
@@ -58,6 +59,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 		ground = GameObject.FindGameObjectWithTag ("Ground");
 		BoxCollider2D thickness = ground.GetComponent<BoxCollider2D> ();
 		distance = maxHeight-(ground.transform.position.y + (thickness.size.y/2));
+		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
+		ballFactory.addList (this.gameObject);
 			
         
 
@@ -171,6 +174,7 @@ public class Ball_Behavioiur : MonoBehaviour {
             Ball_Factory.count--;
             Ball_Factory.smallDeathCount = 0;
         }
+		Ball_Factory.balls.Remove (this.gameObject);
     }
 
 	public void largeHeight()

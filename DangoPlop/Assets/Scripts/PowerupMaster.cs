@@ -94,6 +94,7 @@ public class PowerupMaster : MonoBehaviour {
 			break;
 		case PowerupType.Bomb:
 			renderComponent.sprite = powerupBomb;
+			explosion ();
 			break;
 		case PowerupType.Double:
 			renderComponent.sprite = powerupDouble;
@@ -222,6 +223,14 @@ public class PowerupMaster : MonoBehaviour {
 
 	private void setRapidFire(){
 		playerController.rapidFire ();
+	}
+
+	private void explosion(){
+		foreach (GameObject obj in Ball_Factory.balls) {
+			Ball_Behavioiur split = obj.GetComponent<Ball_Behavioiur> ();
+			split.HandleSplit ();
+			Destroy (obj);
+		}
 	}
 
 	// MAKE YOUR POWERUP FUNCTIONS HERE

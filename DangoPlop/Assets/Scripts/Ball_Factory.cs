@@ -18,6 +18,10 @@ public class Ball_Factory : MonoBehaviour {
     public int rangeStart;
     public int rangeEnd;
     private int randomSpeed;
+	public static List<GameObject> balls = new List<GameObject> ();
+	public float SpawnHeight;
+	private Vector2 newPos;
+	private Vector2 newPos2;
 
 
 
@@ -25,9 +29,15 @@ public class Ball_Factory : MonoBehaviour {
     void Start () {
         count = 0;
         smallDeathCount = 0;
-        StartCoroutine(SpawnWaves());
         targetScore = scoreIncrement;
         notInLoop = false;    
+		spawnPos = GameObject.FindGameObjectWithTag ("SpawnOne");
+		spawnPos2 = GameObject.FindGameObjectWithTag ("SpawnTwo");
+		newPos.Set (spawnPos.transform.position.x, SpawnHeight);
+		newPos2.Set (spawnPos2.transform.position.x, SpawnHeight);
+		spawnPos.transform.position = newPos;
+		spawnPos2.transform.position = newPos2;
+		StartCoroutine(SpawnWaves());
 
 
     }
@@ -77,5 +87,9 @@ public class Ball_Factory : MonoBehaviour {
 
 
     }
+
+	public void addList(GameObject obj){
+		balls.Add (obj);
+	}
 
 }
