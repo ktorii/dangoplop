@@ -43,6 +43,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public Vector2 newSpeed;
 	private GameObject ground;
 	private double distance;
+
     
 
     // Use this for initialization
@@ -186,5 +187,16 @@ public class Ball_Behavioiur : MonoBehaviour {
     {
         maxHeight = sHeight;
     }
+
+	public void stop(){
+		rb.velocity = Vector2.zero;
+		rb.isKinematic = true;
+
+	}
+	public void resume(){
+		rb.isKinematic = false;
+		rb.AddForce(Vector2.right * thrust);
+
+	}
 
 }

@@ -119,6 +119,7 @@ public class PowerupMaster : MonoBehaviour {
 			break;
 		case PowerupType.Time:
 			renderComponent.sprite = powerupTime;
+			stopTime ();
 			break;
 		default:
 			break;
@@ -166,6 +167,7 @@ public class PowerupMaster : MonoBehaviour {
 			setResetBulletType ();
 			break;
 		case PowerupType.Time:
+			continueTime ();
 			break;
 		default:
 			break;
@@ -223,6 +225,23 @@ public class PowerupMaster : MonoBehaviour {
 	private void setRapidFire(){
 		playerController.rapidFire ();
 	}
+
+	private void stopTime(){
+		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
+		foreach (GameObject ball in balls) {
+			Ball_Behavioiur access = ball.GetComponent<Ball_Behavioiur> ();
+			access.stop ();
+		}
+	}
+
+	private void continueTime(){
+		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
+		foreach (GameObject ball in balls) {
+			Ball_Behavioiur access = ball.GetComponent<Ball_Behavioiur> ();
+			access.resume ();
+		}
+	}
+
 
 	// MAKE YOUR POWERUP FUNCTIONS HERE
 }
