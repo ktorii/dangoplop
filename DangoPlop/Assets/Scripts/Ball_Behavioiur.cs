@@ -41,8 +41,14 @@ public class Ball_Behavioiur : MonoBehaviour {
     public double mHeight;
     public double lHeight;
 	public Vector2 newSpeed;
+	public Vector2 newSideSpeed;
+	public float previousSpeed;
 	private GameObject ground;
 	private double distance;
+	private Ball_Factory ballFactory;
+	public static bool timePaused;
+	public static bool notRetrieved;
+
     
 
     // Use this for initialization
@@ -58,6 +64,9 @@ public class Ball_Behavioiur : MonoBehaviour {
 		ground = GameObject.FindGameObjectWithTag ("Ground");
 		BoxCollider2D thickness = ground.GetComponent<BoxCollider2D> ();
 		distance = maxHeight-(ground.transform.position.y + (thickness.size.y/2));
+		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
+		ballFactory.addList (this.gameObject);
+		notRetrieved = true;
 			
         
 
@@ -75,6 +84,10 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 
         position = rb.transform.position;
+
+		if (timePaused) {
+			stop ();
+		}
 
     }
 
@@ -171,6 +184,7 @@ public class Ball_Behavioiur : MonoBehaviour {
             Ball_Factory.count--;
             Ball_Factory.smallDeathCount = 0;
         }
+		Ball_Factory.balls.Remove (this.gameObject);
     }
 
 	public void largeHeight()
@@ -186,5 +200,24 @@ public class Ball_Behavioiur : MonoBehaviour {
     {
         maxHeight = sHeight;
     }
+
+	public void stop(){
+		if (notRetrieved) {			
+			previousSpeed = rb.velocity.x;
+		}
+		rb.velocity = Vector2.zero;
+		rb.isKinematic = true;
+
+	}
+	public void resume(){
+		rb.isKinematic = false;
+		newSideSpeed.Set (previousSpeed, 0.0f);
+		rb.velocity = newSideSpeed;
+		notRetrieved = true;
+		if (previousSpeed == 0) {			
+			rb.AddForce (Vector2.right * thrust);
+		}
+
+	}
 
 }
