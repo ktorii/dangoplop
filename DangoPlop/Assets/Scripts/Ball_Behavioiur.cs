@@ -211,10 +211,12 @@ public class Ball_Behavioiur : MonoBehaviour {
 	}
 	public void resume(){
 		rb.isKinematic = false;
-		//newSideSpeed.Set (previousSpeed, 0.0f);
-		//rb.velocity = newSideSpeed;
-		//notRetrieved = true;
-		rb.AddForce(Vector2.right * thrust);
+		newSideSpeed.Set (previousSpeed, 0.0f);
+		rb.velocity = newSideSpeed;
+		notRetrieved = true;
+		if (previousSpeed == 0) {			
+			rb.AddForce (Vector2.right * thrust);
+		}
 
 	}
 
