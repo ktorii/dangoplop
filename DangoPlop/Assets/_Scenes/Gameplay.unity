@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 146897847}
   m_Layer: 0
   m_Name: SpawnPos
-  m_TagString: Untagged
+  m_TagString: SpawnOne
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,6 +708,7 @@ MonoBehaviour:
   scoreIncrement: 1000
   rangeStart: 100
   rangeEnd: 200
+  SpawnHeight: 0
 --- !u!1 &1092480767
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +867,7 @@ MonoBehaviour:
   FirstBulletTranslateY: 0
   SecondBulletTranslateX: 0.3
   SecondBulletTranslateY: 0
-  bulletType: 3
+  bulletType: 0
   AmmoReset: 0
   Froze: 0
 --- !u!50 &1112566740
@@ -1146,29 +1147,6 @@ SpriteRenderer:
   m_Color: {r: 0.5588235, g: 0.5588235, b: 0.5588235, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &1175558787 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1900207663490562, guid: 0da75ffbd95f349d1b586b504717d862,
-    type: 2}
-  m_PrefabInternal: {fileID: 1630311787}
---- !u!114 &1175558793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1175558787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3ddb0e2f38f3a840911501d198ff41c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeLandedToDestroy: 3
-  verticalSpeed: 2
-  powerupExplosion: {fileID: 1373985343339942, guid: f989474e11aa74082b243f06fdef7afc,
-    type: 2}
-  powerupGlow: {fileID: 1374429659103120, guid: 5635a64fa82454042addfa93354b19b0,
-    type: 2}
-  timeLastingPowerup: 4
 --- !u!1 &1197787038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,59 +1527,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4990958719308836, guid: 78b5ca281c0b64d948d19baaf994f648,
     type: 2}
   m_PrefabInternal: {fileID: 1218854720}
---- !u!1001 &1630311787
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997673853332958, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1900207663490562, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-      propertyPath: m_Name
-      value: PowerupTime
-      objectReference: {fileID: 0}
-    - target: {fileID: 212812862070555908, guid: 0da75ffbd95f349d1b586b504717d862,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: d1994dff4d3fd6042a335cdaf0c323a3,
-        type: 3}
-    m_RemovedComponents:
-    - {fileID: 114798592650156084, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: 0da75ffbd95f349d1b586b504717d862, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1660714523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,7 +1611,7 @@ GameObject:
   - component: {fileID: 1690408494}
   m_Layer: 0
   m_Name: SpawnPos2
-  m_TagString: Untagged
+  m_TagString: SpawnTwo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

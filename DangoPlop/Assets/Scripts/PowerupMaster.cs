@@ -227,16 +227,17 @@ public class PowerupMaster : MonoBehaviour {
 	}
 
 	private void stopTime(){
-		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
-		foreach (GameObject ball in balls) {
+		Ball_Behavioiur.timePaused = true;
+		foreach (GameObject ball in Ball_Factory.balls) {
 			Ball_Behavioiur access = ball.GetComponent<Ball_Behavioiur> ();
 			access.stop ();
+			Ball_Behavioiur.notRetrieved = false;
 		}
 	}
 
 	private void continueTime(){
-		GameObject[] balls = GameObject.FindGameObjectsWithTag ("Ball");
-		foreach (GameObject ball in balls) {
+		Ball_Behavioiur.timePaused = false;
+		foreach (GameObject ball in Ball_Factory.balls) {
 			Ball_Behavioiur access = ball.GetComponent<Ball_Behavioiur> ();
 			access.resume ();
 		}
