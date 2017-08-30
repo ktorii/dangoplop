@@ -198,7 +198,7 @@ namespace TwoDLaserPack
 
         private void Start()
 		{	
-			ProjectilePos = GameObject.Find("ProjectilePos");
+			ProjectilePos = GameObject.Find("BulletPos");
             startLaserLength = maxLaserLength;
             if (laserOscillationPositionerScript != null) laserOscillationPositionerScript.radius = oscillationThreshold;
 

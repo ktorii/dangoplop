@@ -158,7 +158,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 		}
 		if (Projectile == true) {
-			Destroy (gameObject);
+			Destroy (this.gameObject);
 		}
 	}
 
@@ -168,8 +168,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D blip){
 		if (blip.gameObject.tag == "Projectile") {
 			ScoreManager.Score += LargeScoreValue;
-			HandleSplit ();
 			BallExplosion ();
+			HandleSplit ();
 		}
 	}
 
