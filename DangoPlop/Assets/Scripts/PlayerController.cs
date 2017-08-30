@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour {
 	public bool Froze;
 	private PowerupMaster powerupMaster;
 	private Vector2 deadMotion;
+	private ChangeBackground change;
+
+
+
+
 
 	void Start() {
 		
@@ -56,6 +61,8 @@ public class PlayerController : MonoBehaviour {
 		deadMotion.Set (3.0f, 8.0f);
 		collider.isTrigger = false;
 		anim.SetBool ("Dead", false);
+		change = GameObject.FindGameObjectWithTag ("Ceiling").GetComponent<ChangeBackground> ();
+
     }
 	void FixedUpdate() {
 
@@ -118,6 +125,7 @@ public class PlayerController : MonoBehaviour {
 			anim.SetBool ("Dead", true);
 			collider.isTrigger = true;
            FindObjectOfType<GameOverMenu>().EndGame();
+			change.changeBackground ();
 			rb2d.velocity = deadMotion;
 
 

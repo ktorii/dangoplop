@@ -1196,14 +1196,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 17ccd454fde163849973ceb66c52eddd, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1670,6 +1670,7 @@ GameObject:
   - component: {fileID: 1823898791}
   - component: {fileID: 1823898794}
   - component: {fileID: 1823898792}
+  - component: {fileID: 1823898793}
   m_Layer: 0
   m_Name: BackgroundTop
   m_TagString: Ceiling
@@ -1753,6 +1754,19 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 1.9159721}
   serializedVersion: 2
   m_Size: {x: 130, y: 0.23681235}
+--- !u!114 &1823898793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1823898788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c94b7f3fdf93e409fcf349548601d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ogBackground: {fileID: 21300000, guid: b700e0c0a4d301c4fbae5ccc9f0ea92e, type: 3}
+  redBackground: {fileID: 21300000, guid: 17ccd454fde163849973ceb66c52eddd, type: 3}
 --- !u!61 &1823898794
 BoxCollider2D:
   m_ObjectHideFlags: 0
