@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 	public GameObject Projectile2;
 	public GameObject Projectile3;
 	public GameObject Laser;
-	private Transform ProjectilePos;
+	private GameObject ProjectilePos;
 	public int Ammo = 3;
 	public float currentDoubleShotAmmo;
 	public float maxDoubleShotAmmo;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour {
 
 		rb2d = GetComponent<Rigidbody2D> ();
 		collider = GetComponent<CapsuleCollider2D> ();
-		ProjectilePos = transform.Find ("ProjectilePos");
+		ProjectilePos = GameObject.FindGameObjectWithTag("ProjectilePos");
         anim = GetComponent<Animator>();
 		anim.updateMode = AnimatorUpdateMode.UnscaledTime;
 		originalScale = gameObject.transform.lossyScale;
@@ -136,20 +136,20 @@ public class PlayerController : MonoBehaviour {
 	public void Fire(){
 		if (bulletType == BulletType.DefaultFire) {
 			nextFire = Time.time + FireRate;
-			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
+			Instantiate (Projectile, ProjectilePos.transform.position, Quaternion.identity);
 			anim.SetBool("Shot", true);
 			Ammo--;
 		}
 		else if (bulletType == BulletType.Laser) {
 			nextFire = Time.time + LaserRate;
-			Instantiate (Laser, ProjectilePos.position, Quaternion.identity);
+			Instantiate (Laser, ProjectilePos.transform.position, Quaternion.identity);
 			anim.SetBool("Shot", true);
 			Ammo--;
 		}
 		else if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
 			nextFire = Time.time + DoubleShotRate;
-			var doubleShot1 = Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
-			var doubleShot2 = Instantiate (Projectile3, ProjectilePos.position, Quaternion.identity);
+			var doubleShot1 = Instantiate (Projectile2, ProjectilePos.transform.position, Quaternion.identity);
+			var doubleShot2 = Instantiate (Projectile3, ProjectilePos.transform.position, Quaternion.identity);
 			doubleShot1.transform.Translate (FirstBulletTranslateX, FirstBulletTranslateY, 0, Space.World);
 			doubleShot2.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
 			anim.SetBool("Shot", true);
@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (bulletType == BulletType.RapidFire) {
 			nextFire = Time.time + FireRate;
-			Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
+			Instantiate (Projectile2, ProjectilePos.transform.position, Quaternion.identity);
 
 		}
 	}
