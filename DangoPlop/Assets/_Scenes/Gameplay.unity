@@ -1232,24 +1232,15 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier:
   m_Material: {fileID: 0}
-<<<<<<< HEAD
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-=======
-  m_Color: {r: 1, g: 0, b: 0, a: 0.392}
->>>>>>> ogorigin/develop
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-<<<<<<< HEAD
   m_Sprite: {fileID: 0}
   m_Type: 0
-=======
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
->>>>>>> ogorigin/develop
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1837,7 +1828,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 130, y: 0.23681235}
-<<<<<<< HEAD
 --- !u!114 &1823898793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1851,9 +1841,6 @@ MonoBehaviour:
   m_EditorClassIdentifier:
   ogBackground: {fileID: 21300000, guid: b700e0c0a4d301c4fbae5ccc9f0ea92e, type: 3}
   redBackground: {fileID: 21300000, guid: 17ccd454fde163849973ceb66c52eddd, type: 3}
-=======
-  m_EdgeRadius: 0
->>>>>>> ogorigin/develop
 --- !u!61 &1823898794
 BoxCollider2D:
   m_ObjectHideFlags: 0
