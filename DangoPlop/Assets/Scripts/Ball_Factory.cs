@@ -92,4 +92,8 @@ public class Ball_Factory : MonoBehaviour {
 		balls.Add (obj);
 	}
 
+	public List<GameObject> returnList(){
+		return balls;
+	}
+
 }
