@@ -14,6 +14,7 @@ public enum BulletType
 public class PlayerController : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
+	private CapsuleCollider2D collider;
 	public float speedScale;
 	public float maxHorizontalSpeed;
 	public float baseJumpPower;
@@ -40,16 +41,21 @@ public class PlayerController : MonoBehaviour {
 	public bool AmmoReset = false;
 	public bool Froze;
 	private PowerupMaster powerupMaster;
+	private Vector2 deadMotion;
 
 	void Start() {
 		
 		rb2d = GetComponent<Rigidbody2D> ();
+		collider = GetComponent<CapsuleCollider2D> ();
 		ProjectilePos = transform.Find ("ProjectilePos");
         anim = GetComponent<Animator>();
 		anim.updateMode = AnimatorUpdateMode.UnscaledTime;
 		originalScale = gameObject.transform.lossyScale;
 		originalHeight = gameObject.transform.position.y;
 		powerupMaster = GameObject.FindGameObjectWithTag ("PowerupPanel").GetComponent<PowerupMaster> ();
+		deadMotion.Set (3.0f, 8.0f);
+		collider.isTrigger = false;
+		anim.SetBool ("Dead", false);
     }
 	void FixedUpdate() {
 
@@ -108,7 +114,13 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ball")
         {
+			Debug.Log ("dead");
+			anim.SetBool ("Dead", true);
+			collider.isTrigger = true;
            FindObjectOfType<GameOverMenu>().EndGame();
+			rb2d.velocity = deadMotion;
+
+
         }
     }
 
