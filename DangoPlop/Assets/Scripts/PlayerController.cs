@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 	public float groundYPosition;
 	public GameObject Projectile;
 	public GameObject Projectile2;
+	public GameObject Projectile3;
 	public GameObject Laser;
 	private Transform ProjectilePos;
 	public int Ammo = 3;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	void Start() {
-		
+
 		rb2d = GetComponent<Rigidbody2D> ();
 		collider = GetComponent<CapsuleCollider2D> ();
 		ProjectilePos = transform.Find ("ProjectilePos");
@@ -85,16 +86,16 @@ public class PlayerController : MonoBehaviour {
 			moveHorizontal = maxHorizontalSpeed;
 		}
 
-	
+
 		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire) {
 			Fire ();
-			anim.SetBool("Shot", true);
 			StartCoroutine(Wait());
 
 		}
 
-		if (Ammo > 3 && AmmoReset == true) {
+		if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 & AmmoReset == true) {
 			Ammo = 3;
+			currentDoubleShotAmmo = 3;
 		}
 
 		rb2d.velocity = new Vector2 (moveHorizontal, rb2d.velocity.y);
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour {
 		if (Froze) {
 			speedScale = 0;
 		}
-			
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -136,21 +137,24 @@ public class PlayerController : MonoBehaviour {
 		if (bulletType == BulletType.DefaultFire) {
 			nextFire = Time.time + FireRate;
 			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
+			anim.SetBool("Shot", true);
 			Ammo--;
-		} 
+		}
 		else if (bulletType == BulletType.Laser) {
 			nextFire = Time.time + LaserRate;
 			Instantiate (Laser, ProjectilePos.position, Quaternion.identity);
+			anim.SetBool("Shot", true);
 			Ammo--;
-		} 
+		}
 		else if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
 			nextFire = Time.time + DoubleShotRate;
 			var doubleShot1 = Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
-			var doubleShot2 = Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
+			var doubleShot2 = Instantiate (Projectile3, ProjectilePos.position, Quaternion.identity);
 			doubleShot1.transform.Translate (FirstBulletTranslateX, FirstBulletTranslateY, 0, Space.World);
 			doubleShot2.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
+			anim.SetBool("Shot", true);
 			currentDoubleShotAmmo--;
-		} 
+		}
 		else if (bulletType == BulletType.RapidFire) {
 			nextFire = Time.time + FireRate;
 			Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
@@ -158,7 +162,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public Vector3 getOriginalScale() {	
+	public Vector3 getOriginalScale() {
 		return originalScale;
 	}
 
@@ -174,7 +178,7 @@ public class PlayerController : MonoBehaviour {
 	public void doubleShot(){
 		bulletType = BulletType.DoubleShot;
 		currentDoubleShotAmmo = maxDoubleShotAmmo;
-
+		AmmoReset = true;
 	}
 
 	public void rapidFire(){
@@ -186,14 +190,14 @@ public class PlayerController : MonoBehaviour {
 		AmmoReset = true;
 
 	}
-	
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.3f);
 		if (bulletType == BulletType.Laser) {
-			DestroyByTime LaserTime = GameObject.FindGameObjectWithTag ("Projectile").GetComponent<DestroyByTime> ();
+			LaserStopTime LaserTime = GameObject.FindGameObjectWithTag ("Projectile").GetComponent<LaserStopTime> ();
 			Froze = true;
-			yield return new WaitForSeconds (LaserRate = LaserTime.laserRate);
+			yield return new WaitForSeconds (LaserRate = LaserTime.LaserTime());
 			speedScale = 4;
 			Froze = false;
 		}
