@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 50767606747507234}
   - component: {fileID: 114676999582168618}
   m_Layer: 0
-  m_Name: Projectile3
+  m_Name: DoubleShotProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
