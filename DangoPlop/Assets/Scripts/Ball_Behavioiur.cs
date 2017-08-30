@@ -41,10 +41,15 @@ public class Ball_Behavioiur : MonoBehaviour {
     public double mHeight;
     public double lHeight;
 	public Vector2 newSpeed;
+	public Vector2 newSideSpeed;
+	public float previousSpeed;
 	private GameObject ground;
 	private double distance;
 	private Ball_Factory ballFactory;
-    
+	public static bool timePaused;
+	public static bool notRetrieved;
+
+
 
     // Use this for initialization
     void Start () {
@@ -61,11 +66,12 @@ public class Ball_Behavioiur : MonoBehaviour {
 		distance = maxHeight-(ground.transform.position.y + (thickness.size.y/2));
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
 		ballFactory.addList (this.gameObject);
-			
-        
+		notRetrieved = true;
+
+
 
     }
-		
+
 	// Update is called once per frame
 	void Update () {
         circle.isTrigger = false;
@@ -78,6 +84,10 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 
         position = rb.transform.position;
+
+		if (timePaused) {
+			stop ();
+		}
 
     }
 
@@ -102,7 +112,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
 
 		if (type != SizeType.SmallBall) {
-			
+
 			var ball1Obj = Instantiate (Ball);
 			var ball2Obj = Instantiate (Ball);
 			Ball_Behavioiur ball1 = ball1Obj.GetComponent<Ball_Behavioiur> ();
@@ -129,7 +139,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = MedScoreValue;
                 ball1.mediumHeight();
                 ball2.mediumHeight();
-				
+
 
 
             }
@@ -148,7 +158,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 		}
 		if (Projectile == true) {
-			Destroy (gameObject);
+			Destroy (this.gameObject);
 		}
 	}
 
@@ -158,8 +168,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D blip){
 		if (blip.gameObject.tag == "Projectile") {
 			ScoreManager.Score += LargeScoreValue;
-			HandleSplit ();
 			BallExplosion ();
+			HandleSplit ();
 		}
 	}
 
@@ -190,5 +200,24 @@ public class Ball_Behavioiur : MonoBehaviour {
     {
         maxHeight = sHeight;
     }
+
+	public void stop(){
+		if (notRetrieved) {
+			previousSpeed = rb.velocity.x;
+		}
+		rb.velocity = Vector2.zero;
+		rb.isKinematic = true;
+
+	}
+	public void resume(){
+		rb.isKinematic = false;
+		newSideSpeed.Set (previousSpeed, 0.0f);
+		rb.velocity = newSideSpeed;
+		notRetrieved = true;
+		if (previousSpeed == 0) {
+			rb.AddForce (Vector2.right * thrust);
+		}
+
+	}
 
 }

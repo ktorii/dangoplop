@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4073272852370426}
   - component: {fileID: 114578098137813612}
-  - component: {fileID: 114461408295303692}
+  - component: {fileID: 114857292346513702}
   m_Layer: 0
   m_Name: BlueSpriteLaser
   m_TagString: Projectile
@@ -148,18 +148,6 @@ MonoBehaviour:
   radius: 0.3
   player: {fileID: 1079573688853542}
   randomPointInCircle: {x: 0, y: 0}
---- !u!114 &114461408295303692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1079573688853542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee8f3134faab49e68c584944c58f255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserRate: 2
 --- !u!114 &114578098137813612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,9 +187,21 @@ MonoBehaviour:
     m_Bits: 256
   useArc: 1
   oscillationThreshold: 0.2
-  ProjectilePos: {fileID: 1846343992359510, guid: 0f608b6a26206430b8db2481da1fd5ee,
+  ProjectilePos: {fileID: 1856427422988774, guid: 7cd2975d041db41a7bd6ccf984d5c7f8,
     type: 2}
   allLasersInScene: {fileID: 114578098137813612}
+--- !u!114 &114857292346513702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1079573688853542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2730a255d17d4f0ea2ca991ecbed08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserStopTime: 2
 --- !u!120 &120577651512485874
 LineRenderer:
   m_ObjectHideFlags: 1

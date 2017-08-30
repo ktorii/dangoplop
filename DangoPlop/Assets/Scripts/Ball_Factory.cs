@@ -30,7 +30,7 @@ public class Ball_Factory : MonoBehaviour {
         count = 0;
         smallDeathCount = 0;
         targetScore = scoreIncrement;
-        notInLoop = false;    
+        notInLoop = false;
 		spawnPos = GameObject.FindGameObjectWithTag ("SpawnOne");
 		spawnPos2 = GameObject.FindGameObjectWithTag ("SpawnTwo");
 		newPos.Set (spawnPos.transform.position.x, SpawnHeight);
@@ -55,7 +55,7 @@ public class Ball_Factory : MonoBehaviour {
 			spawnWait--;
             targetScore += scoreIncrement;
         }
-        
+
 
     }
 
@@ -66,13 +66,13 @@ public class Ball_Factory : MonoBehaviour {
         randomSpeed = (int)(Random.Range(rangeStart, rangeEnd));
         Ball_Behavioiur.thrust = randomSpeed;
         if (random == 0)
-        {			
+        {
             Instantiate(ball, spawnPos.transform.position, transform.rotation);
         }
         else
         {
             Instantiate(ball, spawnPos2.transform.position, transform.rotation);
-        }   
+        }
         count++;
         yield return new WaitForSeconds(spawnWait);
         if (count == maxBalls)
@@ -81,7 +81,7 @@ public class Ball_Factory : MonoBehaviour {
             Debug.Log("DONE RECURSION");
         }
         else
-        {            
+        {
             StartCoroutine(SpawnWaves());
         }
 

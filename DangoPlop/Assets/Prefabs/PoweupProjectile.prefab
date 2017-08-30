@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1124136323892240}
+  m_RootGameObject: {fileID: 1939172496702754}
   m_IsPrefabParent: 1
---- !u!1 &1124136323892240
+--- !u!1 &1939172496702754
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4936393020967888}
-  - component: {fileID: 212549549033552714}
-  - component: {fileID: 58456400493863846}
-  - component: {fileID: 50848947205188408}
-  - component: {fileID: 114328394808475752}
-  m_Layer: 8
-  m_Name: BouncingBall1
-  m_TagString: Ball
+  - component: {fileID: 4105254334132280}
+  - component: {fileID: 212105013334572592}
+  - component: {fileID: 58476248341494444}
+  - component: {fileID: 50105158021237518}
+  - component: {fileID: 114619515772179468}
+  m_Layer: 0
+  m_Name: PoweupProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4936393020967888
+--- !u!4 &4105254334132280
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1124136323892240}
+  m_GameObject: {fileID: 1939172496702754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.34, y: 2.29, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.8258743, y: -2.4563003, z: 0}
+  m_LocalScale: {x: 0.24621919, y: 0.27794003, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50848947205188408
+--- !u!50 &50105158021237518
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1124136323892240}
+  m_GameObject: {fileID: 1939172496702754}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -63,66 +63,45 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &58456400493863846
+--- !u!58 &58476248341494444
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1124136323892240}
+  m_GameObject: {fileID: 1939172496702754}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 52d6d5e52c35e8f4f807a49fa510f7dc, type: 2}
-  m_IsTrigger: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.19
---- !u!114 &114328394808475752
+  m_Radius: 0.5
+--- !u!114 &114619515772179468
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1124136323892240}
+  m_GameObject: {fileID: 1939172496702754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b5097cebbaa46678402f48697b68ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 1db456fade7f84fba83e183d6cab7840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ball: {fileID: 1124136323892240}
-  LargeScoreValue: 10
-  MedScoreValue: 20
-  SmallScoreValue: 30
-  LargeBallScale: 1
-  MedBallScale: 0.5
-  SmallBallScale: 0.3
-  Ball1TranslateX: -0.4
-  Ball2TranslateX: 0.4
-  Ball1TranslateY: 0
-  Ball2TranslateY: 0
-  GameStart: 1
-  ballExplosion: {fileID: 1143983903403302, guid: 316ade966c0b245bc842c2d31d621c08,
-    type: 2}
-  position: {x: 0, y: 0}
-  maxHeight: 0
-  sHeight: -1
-  mHeight: 0
-  lHeight: 1
-  newSpeed: {x: 0, y: 0}
-  newSideSpeed: {x: 0, y: 0}
-  previousSpeed: 0
---- !u!212 &212549549033552714
+  Speed: {x: 0, y: 5}
+--- !u!212 &212105013334572592
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1124136323892240}
+  m_GameObject: {fileID: 1939172496702754}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -143,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e84c60c139f14894096bc6e251de5789, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6ce1e821cbd3a3439dc3dfc9807b877, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

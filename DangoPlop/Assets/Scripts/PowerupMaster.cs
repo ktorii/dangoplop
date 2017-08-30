@@ -20,7 +20,7 @@ public enum PowerupType {
  *              It has access to the player, ballfactory, and poweruppanel.
  *              The powerupMaster has all knowledge of the state of the active powerups and controls
  * 				the logic that deals with them.
- * Important:	Powerups do not pile on top of each other. If I get a shrink powerup and then a 
+ * Important:	Powerups do not pile on top of each other. If I get a shrink powerup and then a
  * 				double shot powerup, I only have a double shot powerup and I'm not shrunk anymore
  * 				(this is easily implementable though with how Ken set this script up)
  */
@@ -56,10 +56,10 @@ public class PowerupMaster : MonoBehaviour {
 		playerController = playerObject.GetComponent<PlayerController> ();
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		// if there is a time limit set for the powerup, then check if the 
+		// if there is a time limit set for the powerup, then check if the
 		if (isActivePowerupTimeLimitSet()) {
 			if (activePowerupTimer >= activePowerupTimeLimit) {
 				stopPreviousActivePowerup ();
@@ -120,6 +120,7 @@ public class PowerupMaster : MonoBehaviour {
 			break;
 		case PowerupType.Time:
 			renderComponent.sprite = powerupTime;
+			stopTime ();
 			break;
 		default:
 			break;
@@ -167,6 +168,7 @@ public class PowerupMaster : MonoBehaviour {
 			setResetBulletType ();
 			break;
 		case PowerupType.Time:
+			continueTime ();
 			break;
 		default:
 			break;
@@ -225,6 +227,23 @@ public class PowerupMaster : MonoBehaviour {
 		playerController.rapidFire ();
 	}
 
+	private void stopTime(){
+		Ball_Behavioiur.timePaused = true;
+		foreach (GameObject ball in ballFactory.returnList()) {
+			Ball_Behavioiur access = ball.GetComponent<Ball_Behavioiur> ();
+			access.stop ();
+			Ball_Behavioiur.notRetrieved = false;
+		}
+	}
+
+	private void continueTime(){
+		Ball_Behavioiur.timePaused = false;
+		foreach (GameObject ball in ballFactory.returnList()) {
+			Ball_Behavioiur access = ball.GetComponent<Ball_Behavioiur> ();
+			access.resume ();
+		}
+	}
+
 	private void explosion(){
 		foreach (GameObject obj in ballFactory.returnList()) {
 			Ball_Behavioiur split = obj.GetComponent<Ball_Behavioiur> ();
@@ -232,6 +251,7 @@ public class PowerupMaster : MonoBehaviour {
 			Destroy (obj);
 		}
 	}
+
 
 	// MAKE YOUR POWERUP FUNCTIONS HERE
 }
