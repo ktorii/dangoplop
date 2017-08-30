@@ -879,7 +879,7 @@ MonoBehaviour:
     type: 2}
   Laser: {fileID: 1079573688853542, guid: 3f000830fc1bc4f03bd689f0e8e4cde9, type: 2}
   Ammo: 3
-  currentDoubleShotAmmo: 3
+  currentDoubleShotAmmo: 0
   maxDoubleShotAmmo: 3
   anim: {fileID: 0}
   FireRate: 0.1
