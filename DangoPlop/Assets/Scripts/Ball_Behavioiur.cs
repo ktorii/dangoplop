@@ -157,9 +157,9 @@ public class Ball_Behavioiur : MonoBehaviour {
             }
 
 		}
-		if (Projectile == true) {
+//		if (Projectile == true) {
 			Destroy (this.gameObject);
-		}
+//		}
 	}
 
 

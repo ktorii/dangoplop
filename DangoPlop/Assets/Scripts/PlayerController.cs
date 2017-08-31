@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour {
 		powerupMaster = GameObject.FindGameObjectWithTag ("PowerupPanel").GetComponent<PowerupMaster> ();
     }
 	void FixedUpdate() {
-
 		float moveVertical = Input.GetAxis ("Vertical");
 		// dango can only jump if it's on the ground
 		if(moveVertical > 0 && rb2d.position.y <= groundYPosition) {
