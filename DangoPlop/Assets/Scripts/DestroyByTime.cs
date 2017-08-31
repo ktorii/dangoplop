@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class DestroyByTime : MonoBehaviour {
-	public float laserRate;
+	public float lifeTimeLimit;
 
 	// Use this for initialization
 	void Start () {
-		Destroy (gameObject, laserRate);
+		Destroy (gameObject, lifeTimeLimit);
 	}
 }
