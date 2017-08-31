@@ -14,7 +14,6 @@ public class BulletController : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		rb.velocity = Speed;
-		rb.velocity = Speed;
 		PlayerControl = GameObject.Find ("Player");
 		ammo = PlayerControl.GetComponent<PlayerController> ();
 	}
