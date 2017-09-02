@@ -916,7 +916,7 @@ MonoBehaviour:
   currentDoubleShotAmmo: 0
   maxDoubleShotAmmo: 3
   anim: {fileID: 0}
-  FireRate: 0.1
+  FireRate: 0.05
   DoubleShotRate: 0.1
   LaserRate: 2
   nextFire: 0
