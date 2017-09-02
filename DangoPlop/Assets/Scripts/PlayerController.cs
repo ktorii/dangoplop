@@ -18,32 +18,43 @@ public class PlayerController : MonoBehaviour {
 	public float maxHorizontalSpeed;
 	public float baseJumpPower;
 	public float groundYPosition;
-	public GameObject Projectile;
-	public GameObject Projectile2;
-	public GameObject Projectile3;
-	public GameObject Laser;
-	private Transform ProjectilePos;
-	public int Ammo = 3;
-	public float currentDoubleShotAmmo;
-	public float maxDoubleShotAmmo;
-    public Animator anim;
+
+	public Animator anim;
 	private Vector3 originalScale;
 	private float originalHeight;
+
+	// projectiles
+	public GameObject Projectile;
+	public GameObject Laser;
+	private Transform ProjectilePos;
+
+	// Ammo contains the number of shots the player has left to use for their current bullet
+	public static int defaultAmmoMax = 3;
+	public int doubleShotAmmoMax = 3;
+	public int rapidShotAmmoMax = int.MaxValue;
+	public int Ammo = defaultAmmoMax;
+	public BulletType currentBulletType = BulletType.DefaultFire;
+
+	// fire rates
 	public float FireRate = 0F;
 	public float DoubleShotRate = 0.5F;
 	public float LaserRate = 2F;
 	public float nextFire = 0.0F;
+
+	// double shot powerup
 	public float FirstBulletTranslateX = -0.3F;
 	public float FirstBulletTranslateY = 0F;
 	public float SecondBulletTranslateX = 0.3F;
 	public float SecondBulletTranslateY = 0F;
-	public BulletType bulletType = BulletType.DefaultFire;
+
 	public bool AmmoReset = false;
+	// laser to freeze player
 	public bool Froze;
 	private PowerupMaster powerupMaster;
 
+	private int times = 0;
+
 	void Start() {
-		
 		rb2d = GetComponent<Rigidbody2D> ();
 		ProjectilePos = transform.Find ("BulletPos");
         anim = GetComponent<Animator>();
@@ -72,16 +83,12 @@ public class PlayerController : MonoBehaviour {
 			moveHorizontal = maxHorizontalSpeed;
 		}
 
-	
-		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire) {
+		bool hasInfiniteAmmo = (currentBulletType == BulletType.RapidFire || currentBulletType == BulletType.Laser);
+		if (Input.GetKeyDown(KeyCode.X) && (Ammo > 0 || hasInfiniteAmmo) && Time.time > nextFire) {
 			Fire ();
+			print ("fired!" + times);
+			times++; // delete this once you are done. for debugging.
 			StartCoroutine(Wait());
-
-		}
-
-		if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 && AmmoReset == true) {
-			Ammo = 3;
-			currentDoubleShotAmmo = 3;
 		}
 
 		rb2d.velocity = new Vector2 (moveHorizontal, rb2d.velocity.y);
@@ -113,31 +120,31 @@ public class PlayerController : MonoBehaviour {
     }
 
 	public void Fire(){
-		if (bulletType == BulletType.DefaultFire) {
+		if (currentBulletType == BulletType.DefaultFire) {
 			nextFire = Time.time + FireRate;
 			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
 			anim.SetBool("Shot", true);
 			Ammo--;
 		} 
-		else if (bulletType == BulletType.Laser) {
+		else if (currentBulletType == BulletType.Laser) {
 			nextFire = Time.time + LaserRate;
 			Instantiate (Laser, ProjectilePos.position, Quaternion.identity);
 			anim.SetBool("Shot", true);
 			Ammo--;
 		} 
-		else if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
+		else if (currentBulletType == BulletType.DoubleShot) {
 			nextFire = Time.time + DoubleShotRate;
-			var doubleShot1 = Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
-			var doubleShot2 = Instantiate (Projectile3, ProjectilePos.position, Quaternion.identity);
+			var doubleShot1 = Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
+			var doubleShot2 = Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
 			doubleShot1.transform.Translate (FirstBulletTranslateX, FirstBulletTranslateY, 0, Space.World);
 			doubleShot2.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
 			anim.SetBool("Shot", true);
-			currentDoubleShotAmmo--;
+			Ammo--;
 		} 
-		else if (bulletType == BulletType.RapidFire) {
+		else if (currentBulletType == BulletType.RapidFire) {
 			nextFire = Time.time + FireRate;
-			Instantiate (Projectile2, ProjectilePos.position, Quaternion.identity);
-
+			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
+			anim.SetBool("Shot", true);
 		}
 	}
 
@@ -149,32 +156,77 @@ public class PlayerController : MonoBehaviour {
 		return originalHeight;
 	}
 
+
+	// functions to set the state of the bullet
+	public void setBulletType(BulletType newBulletType) {
+		switch (newBulletType) {
+		case BulletType.Laser:
+			currentBulletType = BulletType.Laser;
+//			AmmoReset = false;
+			break;
+		case BulletType.DoubleShot:
+			currentBulletType = BulletType.DoubleShot;
+			Ammo = doubleShotAmmoMax;
+//			AmmoReset = true;
+			break;
+		case BulletType.RapidFire:
+			currentBulletType = BulletType.RapidFire;
+			Ammo = rapidShotAmmoMax;
+			break;
+		case BulletType.DefaultFire:
+			currentBulletType = BulletType.DefaultFire;
+			Ammo = defaultAmmoMax;
+			print ("reset to default");
+//			AmmoReset = true;
+			break;
+		default:
+			break;
+		}
+	}
+
+	public void incrementAmmo() {
+		switch (currentBulletType) {
+		case BulletType.Laser:
+			break;
+		case BulletType.DoubleShot:
+			if (Ammo < doubleShotAmmoMax) {
+				Ammo++;
+			}
+			break;
+		case BulletType.RapidFire:
+			if (Ammo < rapidShotAmmoMax) {
+				Ammo++;
+			}
+			break;
+		case BulletType.DefaultFire:
+			if (Ammo < defaultAmmoMax) {
+				Ammo++;
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
 	public void laser(){
-		bulletType = BulletType.Laser;
-		AmmoReset = false;
+		
 	}
-
 	public void doubleShot(){
-		bulletType = BulletType.DoubleShot;
-		currentDoubleShotAmmo = maxDoubleShotAmmo;
-		AmmoReset = true;
+		
 
 	}
-
 	public void rapidFire(){
-		bulletType = BulletType.RapidFire;
+		
 	}
-
 	public void defaultFire(){
-		bulletType = BulletType.DefaultFire;
-		AmmoReset = true;
+		
 
 	}
 	
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.3f);
-		if (bulletType == BulletType.Laser) {
+		if (currentBulletType == BulletType.Laser) {
 			LaserStopTime LaserTime = GameObject.FindGameObjectWithTag ("Projectile").GetComponent<LaserStopTime> ();
 			Froze = true;
 			yield return new WaitForSeconds (LaserRate = LaserTime.LaserTime());

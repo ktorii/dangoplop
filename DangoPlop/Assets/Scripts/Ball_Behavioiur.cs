@@ -139,9 +139,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = MedScoreValue;
                 ball1.mediumHeight();
                 ball2.mediumHeight();
-				
-
-
             }
 
 			else if (type == SizeType.MediumBall) {
@@ -153,7 +150,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = SmallScoreValue;
                 ball1.smallHeight();
                 ball2.smallHeight();
-
             }
 
 		}

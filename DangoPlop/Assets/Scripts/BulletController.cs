@@ -25,10 +25,14 @@ public class BulletController : MonoBehaviour {
 		
 
 	public virtual void OnTriggerEnter2D(Collider2D target){
+		print (ammo);
+		bool test = (target.gameObject.CompareTag ("Ceiling") || target.gameObject.CompareTag ("Ball") && ammo != null);
+		print (test);
+
 		if (target.gameObject.CompareTag ("Ceiling") || target.gameObject.CompareTag ("Ball") && ammo != null) {
-			if (ammo.bulletType == BulletType.DefaultFire) {
-				ammo.Ammo++;
-			}
+//			if (ammo.currentBulletType == BulletType.DefaultFire) {
+				ammo.incrementAmmo();
+//			}
 			Destroy (gameObject);
 		}
 

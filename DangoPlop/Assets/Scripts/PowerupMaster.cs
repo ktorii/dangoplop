@@ -97,7 +97,7 @@ public class PowerupMaster : MonoBehaviour {
 			break;
 		case PowerupType.Double:
 			renderComponent.sprite = powerupDouble;
-			setDoubleShot ();
+			playerController.setBulletType (BulletType.DoubleShot);
 			break;
 		case PowerupType.Grow:
 			renderComponent.sprite = powerupGrow;
@@ -105,7 +105,7 @@ public class PowerupMaster : MonoBehaviour {
 			break;
 		case PowerupType.Laser:
 			renderComponent.sprite = powerupLaser;
-			setLaser ();
+			playerController.setBulletType (BulletType.Laser);
 			break;
 		case PowerupType.Life:
 			renderComponent.sprite = powerupLife;
@@ -115,7 +115,7 @@ public class PowerupMaster : MonoBehaviour {
 			break;
 		case PowerupType.Rapidfire:
 			renderComponent.sprite = powerupRapidfire;
-			setRapidFire ();
+			playerController.setBulletType (BulletType.RapidFire);
 			break;
 		case PowerupType.Time:
 			renderComponent.sprite = powerupTime;
@@ -151,20 +151,20 @@ public class PowerupMaster : MonoBehaviour {
 		case PowerupType.Bomb:
 			break;
 		case PowerupType.Double:
-			setResetBulletType ();
+			playerController.setBulletType (BulletType.DefaultFire);
 			break;
 		case PowerupType.Grow:
 			ResetPlayerSize();
 			break;
 		case PowerupType.Laser:
-			setResetBulletType ();
+			playerController.setBulletType (BulletType.DefaultFire);
 			break;
 		case PowerupType.Life:
 			break;
 		case PowerupType.Random:
 			break;
 		case PowerupType.Rapidfire:
-			setResetBulletType ();
+			playerController.setBulletType (BulletType.DefaultFire);
 			break;
 		case PowerupType.Time:
 			continueTime ();
@@ -206,24 +206,6 @@ public class PowerupMaster : MonoBehaviour {
 		Vector3 originalScale = playerController.getOriginalScale ();
 		playerObject.transform.localScale = new Vector3 (originalScale.x * 2, originalScale.y * 2, originalScale.z * 2);
 		Vector3 originalPosition = playerObject.transform.position;
-	}
-
-	private void setResetBulletType(){
-		playerController.defaultFire ();
-
-	}
-
-	private void setDoubleShot(){
-		playerController.doubleShot ();
-	}
-
-	private void setLaser(){
-		playerController.laser ();
-
-	}
-
-	private void setRapidFire(){
-		playerController.rapidFire ();
 	}
 
 	private void stopTime(){
