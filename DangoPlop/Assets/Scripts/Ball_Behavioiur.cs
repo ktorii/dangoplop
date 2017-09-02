@@ -48,6 +48,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	private Ball_Factory ballFactory;
 	public static bool timePaused;
 	public static bool notRetrieved;
+	public string direction;
 
 
 
@@ -67,6 +68,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
 		ballFactory.addList (this.gameObject);
 		notRetrieved = true;
+
 
 
 
@@ -117,10 +119,13 @@ public class Ball_Behavioiur : MonoBehaviour {
 			var ball2Obj = Instantiate (Ball);
 			Ball_Behavioiur ball1 = ball1Obj.GetComponent<Ball_Behavioiur> ();
 			Ball_Behavioiur ball2 = ball2Obj.GetComponent<Ball_Behavioiur> ();
+			ball1.left ();
+			ball2.right ();
 			ball1Speed = ball1Obj.GetComponent<Rigidbody2D> ();
 			ball2Speed = ball2Obj.GetComponent<Rigidbody2D> ();
 			ball1Speed.AddForce (Vector2.left * thrust);
 			ball2Speed.AddForce (Vector2.right * thrust);
+
 
 			Vector2 temp = transform.position;
 			ball1Obj.transform.position = temp;
@@ -212,12 +217,39 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public void resume(){
 		rb.isKinematic = false;
 		newSideSpeed.Set (previousSpeed, 0.0f);
-		rb.velocity = newSideSpeed;
-		notRetrieved = true;
-		if (previousSpeed == 0) {
-			rb.AddForce (Vector2.right * thrust);
+		if (previousSpeed != 0) {
+			rb.velocity = newSideSpeed;
+			notRetrieved = true;
+		}
+		else{
+			if ((this.returnDirection()).Equals ("R")) {	
+				Debug.Log (direction);
+				rb.AddForce (Vector2.right * thrust);
+			} 
+			else {
+				Debug.Log (direction);
+				rb.AddForce (Vector2.left * thrust);
+			}
+				
 		}
 
 	}
+
+	public void right(){
+		direction = "R";
+	}
+
+	public void left(){
+		direction = "L";
+	}
+
+	public string returnDirection(){
+		return direction;
+	}
+	
+
+
+
+
 
 }
