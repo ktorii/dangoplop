@@ -13,6 +13,7 @@ TagManager:
   - Ground
   - SpawnOne
   - SpawnTwo
+  - ProjectilePos
   layers:
   - Default
   - TransparentFX
