@@ -49,7 +49,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public static bool timePaused;
 	public static bool notRetrieved;
 
-    
+
 
     // Use this for initialization
     void Start () {
@@ -67,11 +67,11 @@ public class Ball_Behavioiur : MonoBehaviour {
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
 		ballFactory.addList (this.gameObject);
 		notRetrieved = true;
-			
-        
+
+
 
     }
-		
+
 	// Update is called once per frame
 	void Update () {
         circle.isTrigger = false;
@@ -112,7 +112,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
 
 		if (type != SizeType.SmallBall) {
-			
+
 			var ball1Obj = Instantiate (Ball);
 			var ball2Obj = Instantiate (Ball);
 			Ball_Behavioiur ball1 = ball1Obj.GetComponent<Ball_Behavioiur> ();
@@ -139,7 +139,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = MedScoreValue;
                 ball1.mediumHeight();
                 ball2.mediumHeight();
-				
+
 
 
             }
@@ -202,7 +202,7 @@ public class Ball_Behavioiur : MonoBehaviour {
     }
 
 	public void stop(){
-		if (notRetrieved) {			
+		if (notRetrieved) {
 			previousSpeed = rb.velocity.x;
 		}
 		rb.velocity = Vector2.zero;
@@ -214,7 +214,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 		newSideSpeed.Set (previousSpeed, 0.0f);
 		rb.velocity = newSideSpeed;
 		notRetrieved = true;
-		if (previousSpeed == 0) {			
+		if (previousSpeed == 0) {
 			rb.AddForce (Vector2.right * thrust);
 		}
 
