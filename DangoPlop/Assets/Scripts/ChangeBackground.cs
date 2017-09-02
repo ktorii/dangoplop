@@ -6,6 +6,7 @@ public class ChangeBackground : MonoBehaviour {
 	public Sprite ogBackground;
 	public Sprite redBackground;
 	private SpriteRenderer renderer;
+	public float time;
 	// Use this for initialization
 	void Start () {
 		renderer = GetComponent<SpriteRenderer> ();
@@ -23,7 +24,7 @@ public class ChangeBackground : MonoBehaviour {
 	}
 
 	IEnumerator Wait(){
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (time);
 		renderer.sprite = ogBackground;
 	}
 }
