@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour {
 
 		}
 
-		if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 & AmmoReset == true) {
+		if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 && AmmoReset == true) {
 			Ammo = 3;
 			currentDoubleShotAmmo = 3;
 		}
@@ -159,6 +159,7 @@ public class PlayerController : MonoBehaviour {
 		bulletType = BulletType.DoubleShot;
 		currentDoubleShotAmmo = maxDoubleShotAmmo;
 		AmmoReset = true;
+
 	}
 
 	public void rapidFire(){

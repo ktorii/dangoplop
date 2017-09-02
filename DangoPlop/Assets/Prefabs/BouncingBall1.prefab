@@ -109,8 +109,6 @@ MonoBehaviour:
   mHeight: 0
   lHeight: 1
   newSpeed: {x: 0, y: 0}
-  newSideSpeed: {x: 0, y: 0}
-  previousSpeed: 0
 --- !u!212 &212549549033552714
 SpriteRenderer:
   m_ObjectHideFlags: 1
