@@ -67,6 +67,16 @@ public class PlayerController : MonoBehaviour {
 		alive = true;
 
     }
+
+
+	void Update(){
+		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire) {
+			Fire ();
+			StartCoroutine(Wait());
+
+		}
+	}
+
 	void FixedUpdate() {
 
 		float moveVertical = Input.GetAxis ("Vertical");
@@ -88,12 +98,6 @@ public class PlayerController : MonoBehaviour {
 			moveHorizontal = maxHorizontalSpeed;
 		}
 
-
-		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire && alive) {
-			Fire ();
-			StartCoroutine(Wait());
-
-		}
 
 		if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 && AmmoReset == true) {
 			Ammo = 3;
