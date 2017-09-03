@@ -506,7 +506,6 @@ namespace TwoDLaserPack
 				ballController = ballObject.GetComponent<Ball_Behavioiur> ();
 				ballController.HandleSplit ();
 				Debug.Log ("Hit");
-				ScoreManager.Score += ballController.LargeScoreValue;
 				isTriggered = true;
 
 
