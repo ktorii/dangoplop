@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 	private PowerupMaster powerupMaster;
 	private Vector2 deadMotion;
 	private ChangeBackground change;
+	private bool alive;
 
 
 
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour {
 		collider.isTrigger = false;
 		anim.SetBool ("Dead", false);
 		change = GameObject.FindGameObjectWithTag ("Ceiling").GetComponent<ChangeBackground> ();
+		alive = true;
 
     }
 	void FixedUpdate() {
@@ -87,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire) {
+		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire && alive) {
 			Fire ();
 			StartCoroutine(Wait());
 
@@ -128,6 +130,7 @@ public class PlayerController : MonoBehaviour {
            FindObjectOfType<GameOverMenu>().EndGame();
 			change.changeBackground ();
 			rb2d.velocity = deadMotion;
+			alive = false;
 
 
         }
