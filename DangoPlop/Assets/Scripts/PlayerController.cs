@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 	private PowerupMaster powerupMaster;
 	private Vector2 deadMotion;
 	private ChangeBackground change;
+	private bool alive;
 
 
 
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour {
 		collider.isTrigger = false;
 		anim.SetBool ("Dead", false);
 		change = GameObject.FindGameObjectWithTag ("Ceiling").GetComponent<ChangeBackground> ();
+		alive = true;
 
     }
 
@@ -95,7 +97,6 @@ public class PlayerController : MonoBehaviour {
 		if(moveHorizontal > maxHorizontalSpeed) {
 			moveHorizontal = maxHorizontalSpeed;
 		}
-
 
 
 		if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 && AmmoReset == true) {
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour {
            FindObjectOfType<GameOverMenu>().EndGame();
 			change.changeBackground ();
 			rb2d.velocity = deadMotion;
+			alive = false;
 
 
         }
