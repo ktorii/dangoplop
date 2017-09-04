@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	void Update(){
-		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire) {
+		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire && alive) {
 			Fire ();
 			StartCoroutine(Wait());
 
