@@ -136,6 +136,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 			var smallballscale = new Vector3 (SmallBallScale, SmallBallScale, 1);
 
 			if (type == SizeType.LargeBall) {
+				BallExplosion ();
+				ScoreManager.Score += LargeScoreValue;
 				ball1Obj.transform.localScale = medballscale;
 				ball2Obj.transform.localScale = medballscale;
 				ball1.type = SizeType.MediumBall;
@@ -150,6 +152,8 @@ public class Ball_Behavioiur : MonoBehaviour {
             }
 
 			else if (type == SizeType.MediumBall) {
+				BallExplosion(); 
+				ScoreManager.Score += MedScoreValue;
 				ball1Obj.transform.localScale = smallballscale;
 				ball2Obj.transform.localScale = smallballscale;
 				ball1.type = SizeType.SmallBall;
@@ -163,6 +167,10 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 		}
 		if (Projectile == true) {
+			BallExplosion();
+			if (type == SizeType.SmallBall) {				
+				ScoreManager.Score += SmallScoreValue;
+			}
 			Destroy (this.gameObject);
 		}
 	}
@@ -172,7 +180,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D blip){
 		if (blip.gameObject.tag == "Projectile") {
-			ScoreManager.Score += LargeScoreValue;
 			BallExplosion ();
 			HandleSplit ();
 		}
