@@ -95,10 +95,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Ball")
-        {
-            circle.isTrigger = true;
-        }
 
 		if (coll.gameObject.tag == "Ground") {
 			newSpeed.Set((float)rb.velocity.x,  Mathf.Sqrt ((float)(2 * 9.8 * distance)));
