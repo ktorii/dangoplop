@@ -105,10 +105,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeLandedToDestroy: 3
   verticalSpeed: 2
-  powerupExplosion: {fileID: 1373985343339942, guid: f989474e11aa74082b243f06fdef7afc,
+  powerupExplosionGood: {fileID: 1373985343339942, guid: f989474e11aa74082b243f06fdef7afc,
+    type: 2}
+  powerupExplosionBad: {fileID: 1243639656055012, guid: 7aded7a5875f0477da99c70c58407d14,
     type: 2}
   powerupGlow: {fileID: 1374429659103120, guid: 5635a64fa82454042addfa93354b19b0,
     type: 2}
+  powerupCategory: 0
   timeLastingPowerup: 5
 --- !u!212 &212190123096883074
 SpriteRenderer:
