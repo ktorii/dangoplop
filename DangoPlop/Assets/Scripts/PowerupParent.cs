@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PowerupCategory {
+	Good,
+	Bad,
+}
+
 public class PowerupParent : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
@@ -14,9 +19,13 @@ public class PowerupParent : MonoBehaviour {
 	private GameObject ground;
 	private float groundYPosition;
 	public float verticalSpeed;
-	public GameObject powerupExplosion;
+	public GameObject powerupExplosionGood;
+	public GameObject powerupExplosionBad;
 	public GameObject powerupGlow;
 	private float groundTimer = 0.0f;
+
+	// audio
+	public PowerupCategory powerupCategory = PowerupCategory.Good;
 
 	// powerup attributes for HandlePowerupAction()
 	public float timeLastingPowerup;
@@ -52,7 +61,11 @@ public class PowerupParent : MonoBehaviour {
 			print("powerup collision detected");
 
 			// particle effects
-			Instantiate (powerupExplosion, transform.position, transform.rotation);
+			if (powerupCategory == PowerupCategory.Bad) {
+				Instantiate (powerupExplosionBad, transform.position, transform.rotation);
+			} else {
+				Instantiate (powerupExplosionGood, transform.position, transform.rotation);
+			}
 			Instantiate (powerupGlow, other.transform.position, other.transform.rotation);
 
 			// call appropriate powerup action function
