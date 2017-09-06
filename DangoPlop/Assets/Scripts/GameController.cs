@@ -5,16 +5,19 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
 	private bool isGameRunning = false;
+	// music starts only for first pause
+	private bool firstPauseInitiated = false;
+	public GameObject musicManagerObject;
+	private MusicManager musicManagerScript;
 
 	void Start () {
+		musicManagerScript = musicManagerObject.GetComponent<MusicManager> ();
 	}
 
 	void Update () {
 		UpdateGameState();
 
-		if (Input.GetKeyDown (KeyCode.R)) {
-			Application.LoadLevel (Application.loadedLevel);
-		} else if (Input.GetKeyDown (KeyCode.P)) {
+		if (Input.GetKeyDown (KeyCode.P)) {
 			TogglePause();
 		}
 	}
@@ -34,6 +37,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void TogglePause() {
+
 		isGameRunning = !isGameRunning;
 		FindObjectOfType<GamePausedOverlay>().SetPause(!isGameRunning);
 		FindObjectOfType<PlayerController>().GetComponent<Animator>().updateMode =

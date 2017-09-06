@@ -14,6 +14,9 @@ TagManager:
   - SpawnOne
   - SpawnTwo
   - ProjectilePos
+  - MusicManager
+  - MusicTextType
+  - MusicTextDescription
   layers:
   - Default
   - TransparentFX

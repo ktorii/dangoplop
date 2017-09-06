@@ -51,7 +51,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public string direction;
 
 
-
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -68,9 +67,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
 		ballFactory.addList (this.gameObject);
 		notRetrieved = true;
-
-
-
 
     }
 
@@ -107,6 +103,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	}
 
 	public void HandleSplit(){
+
 		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
 
 		if (type != SizeType.SmallBall) {
