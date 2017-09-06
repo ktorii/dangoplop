@@ -46,6 +46,12 @@ public class PlayerController : MonoBehaviour {
 	private ChangeBackground change;
 	private bool alive;
 
+	private AudioSource[] sounds;
+	private AudioSource soundShoot;
+	private AudioSource soundLaser1;
+	private AudioSource soundLaser2;
+	private AudioSource soundDeath;
+
 
 
 
@@ -66,12 +72,20 @@ public class PlayerController : MonoBehaviour {
 		change = GameObject.FindGameObjectWithTag ("Ceiling").GetComponent<ChangeBackground> ();
 		alive = true;
 
+		// initialize sounds
+		sounds = GetComponents<AudioSource> ();
+		soundShoot = sounds [0];
+		soundLaser1 = sounds [1];
+		soundLaser2 = sounds [2];
+		soundDeath = sounds [3];
+
     }
 
 
 	void Update(){
 		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire && alive) {
 			Fire ();
+			soundShoot.Play ();
 			StartCoroutine(Wait());
 
 		}
@@ -135,7 +149,7 @@ public class PlayerController : MonoBehaviour {
 			change.changeBackground ();
 			rb2d.velocity = deadMotion;
 			alive = false;
-
+			soundDeath.Play ();
 
         }
     }
@@ -152,6 +166,8 @@ public class PlayerController : MonoBehaviour {
 			Instantiate (Laser, ProjectilePos.transform.position, Quaternion.identity);
 			anim.SetBool("Shot", true);
 			Ammo--;
+			soundLaser1.Play ();
+			soundLaser2.Play ();
 		}
 		else if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
 			nextFire = Time.time + DoubleShotRate;

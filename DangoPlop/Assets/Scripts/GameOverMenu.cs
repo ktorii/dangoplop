@@ -8,6 +8,8 @@ public class GameOverMenu : MonoBehaviour {
     public GameObject GameOverUI;
     private bool dead;
     private bool over;
+	public GameObject musicManagerObject;
+	private MusicManager musicManagerScript;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +17,7 @@ public class GameOverMenu : MonoBehaviour {
         GameOverUI.SetActive(false);
         dead = false;
         Time.timeScale = 1;
-        
+		musicManagerScript = musicManagerObject.GetComponent<MusicManager> ();
         		
 	}
 	
@@ -46,7 +48,6 @@ public class GameOverMenu : MonoBehaviour {
         Ball_Factory.count = 0;
         Debug.Log(Ball_Factory.count);
         Time.timeScale = 1;
-
     }
 
     public void MainMenu()
