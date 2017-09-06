@@ -14,6 +14,7 @@ public enum BulletType
 public class PlayerController : MonoBehaviour {
 
 	private Rigidbody2D rb2d;
+	private CapsuleCollider2D collider;
 	public float speedScale;
 	public float maxHorizontalSpeed;
 	public float baseJumpPower;
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 	// projectiles
 	public GameObject Projectile;
 	public GameObject Laser;
-	private Transform ProjectilePos;
+	private GameObject ProjectilePos;
 
 	// Ammo contains the number of shots the player has left to use for their current bullet
 	public static int defaultAmmoMax = 3;
@@ -51,18 +52,42 @@ public class PlayerController : MonoBehaviour {
 	// laser to freeze player
 	public bool Froze;
 	private PowerupMaster powerupMaster;
+	private Vector2 deadMotion;
+	private ChangeBackground change;
+	private bool alive;
+
+
+
+
 
 	private int times = 0;
 
 	void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
-		ProjectilePos = transform.Find ("BulletPos");
+		collider = GetComponent<CapsuleCollider2D> ();
+		ProjectilePos = GameObject.FindGameObjectWithTag("ProjectilePos");
         anim = GetComponent<Animator>();
 		anim.updateMode = AnimatorUpdateMode.UnscaledTime;
 		originalScale = gameObject.transform.lossyScale;
 		originalHeight = gameObject.transform.position.y;
 		powerupMaster = GameObject.FindGameObjectWithTag ("PowerupPanel").GetComponent<PowerupMaster> ();
+		deadMotion.Set (3.0f, 8.0f);
+		collider.isTrigger = false;
+		anim.SetBool ("Dead", false);
+		change = GameObject.FindGameObjectWithTag ("Ceiling").GetComponent<ChangeBackground> ();
+		alive = true;
+
     }
+
+
+	void Update(){
+		if (Input.GetKeyDown(KeyCode.Space) && Ammo > 0 && Time.time > nextFire && alive) {
+			Fire ();
+			StartCoroutine(Wait());
+
+		}
+	}
+
 	void FixedUpdate() {
 		float moveVertical = Input.GetAxis ("Vertical");
 		// dango can only jump if it's on the ground
@@ -108,27 +133,35 @@ public class PlayerController : MonoBehaviour {
 		if (Froze) {
 			speedScale = 0;
 		}
-			
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ball")
         {
+			Debug.Log ("dead");
+			anim.SetBool ("Dead", true);
+			collider.isTrigger = true;
            FindObjectOfType<GameOverMenu>().EndGame();
+			change.changeBackground ();
+			rb2d.velocity = deadMotion;
+			alive = false;
+
+
         }
     }
 
 	public void Fire(){
 		if (currentBulletType == BulletType.DefaultFire) {
 			nextFire = Time.time + FireRate;
-			Instantiate (Projectile, ProjectilePos.position, Quaternion.identity);
+			Instantiate (Projectile, ProjectilePos.transform.position, Quaternion.identity);
 			anim.SetBool("Shot", true);
 			Ammo--;
 		} 
 		else if (currentBulletType == BulletType.Laser) {
 			nextFire = Time.time + LaserRate;
-			Instantiate (Laser, ProjectilePos.position, Quaternion.identity);
+			Instantiate (Laser, ProjectilePos.transform.position, Quaternion.identity);
 			anim.SetBool("Shot", true);
 			Ammo--;
 		} 
@@ -148,7 +181,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public Vector3 getOriginalScale() {	
+	public Vector3 getOriginalScale() {
 		return originalScale;
 	}
 
@@ -222,7 +255,7 @@ public class PlayerController : MonoBehaviour {
 		
 
 	}
-	
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.3f);

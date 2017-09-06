@@ -110,6 +110,7 @@ MonoBehaviour:
   newSpeed: {x: 0, y: 0}
   newSideSpeed: {x: 0, y: 0}
   previousSpeed: 0
+  direction: 
 --- !u!212 &212549549033552714
 SpriteRenderer:
   m_ObjectHideFlags: 1

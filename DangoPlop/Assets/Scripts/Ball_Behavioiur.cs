@@ -48,8 +48,9 @@ public class Ball_Behavioiur : MonoBehaviour {
 	private Ball_Factory ballFactory;
 	public static bool timePaused;
 	public static bool notRetrieved;
+	public string direction;
 
-    
+
 
     // Use this for initialization
     void Start () {
@@ -67,11 +68,12 @@ public class Ball_Behavioiur : MonoBehaviour {
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
 		ballFactory.addList (this.gameObject);
 		notRetrieved = true;
-			
-        
+
+
+
 
     }
-		
+
 	// Update is called once per frame
 	void Update () {
         circle.isTrigger = false;
@@ -93,10 +95,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Ball")
-        {
-            circle.isTrigger = true;
-        }
 
 		if (coll.gameObject.tag == "Ground") {
 			newSpeed.Set((float)rb.velocity.x,  Mathf.Sqrt ((float)(2 * 9.8 * distance)));
@@ -112,15 +110,18 @@ public class Ball_Behavioiur : MonoBehaviour {
 		Projectile = GameObject.FindGameObjectWithTag ("Projectile");
 
 		if (type != SizeType.SmallBall) {
-			
+
 			var ball1Obj = Instantiate (Ball);
 			var ball2Obj = Instantiate (Ball);
 			Ball_Behavioiur ball1 = ball1Obj.GetComponent<Ball_Behavioiur> ();
 			Ball_Behavioiur ball2 = ball2Obj.GetComponent<Ball_Behavioiur> ();
+			ball1.left ();
+			ball2.right ();
 			ball1Speed = ball1Obj.GetComponent<Rigidbody2D> ();
 			ball2Speed = ball2Obj.GetComponent<Rigidbody2D> ();
 			ball1Speed.AddForce (Vector2.left * thrust);
 			ball2Speed.AddForce (Vector2.right * thrust);
+
 
 			Vector2 temp = transform.position;
 			ball1Obj.transform.position = temp;
@@ -131,6 +132,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 			var smallballscale = new Vector3 (SmallBallScale, SmallBallScale, 1);
 
 			if (type == SizeType.LargeBall) {
+				BallExplosion ();
+				ScoreManager.Score += LargeScoreValue;
 				ball1Obj.transform.localScale = medballscale;
 				ball2Obj.transform.localScale = medballscale;
 				ball1.type = SizeType.MediumBall;
@@ -139,9 +142,14 @@ public class Ball_Behavioiur : MonoBehaviour {
 				ball2.LargeScoreValue = MedScoreValue;
                 ball1.mediumHeight();
                 ball2.mediumHeight();
+
+
+
             }
 
 			else if (type == SizeType.MediumBall) {
+				BallExplosion(); 
+				ScoreManager.Score += MedScoreValue;
 				ball1Obj.transform.localScale = smallballscale;
 				ball2Obj.transform.localScale = smallballscale;
 				ball1.type = SizeType.SmallBall;
@@ -153,8 +161,13 @@ public class Ball_Behavioiur : MonoBehaviour {
             }
 
 		}
-
-		Destroy (this.gameObject);
+		if (Projectile == true) {
+			BallExplosion();
+			if (type == SizeType.SmallBall) {				
+				ScoreManager.Score += SmallScoreValue;
+			}
+			Destroy (this.gameObject);
+		}
 	}
 
 
@@ -162,7 +175,6 @@ public class Ball_Behavioiur : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D blip){
 		if (blip.gameObject.tag == "Projectile") {
-			ScoreManager.Score += LargeScoreValue;
 			BallExplosion ();
 			HandleSplit ();
 		}
@@ -197,7 +209,7 @@ public class Ball_Behavioiur : MonoBehaviour {
     }
 
 	public void stop(){
-		if (notRetrieved) {			
+		if (notRetrieved) {
 			previousSpeed = rb.velocity.x;
 		}
 		rb.velocity = Vector2.zero;
@@ -207,12 +219,39 @@ public class Ball_Behavioiur : MonoBehaviour {
 	public void resume(){
 		rb.isKinematic = false;
 		newSideSpeed.Set (previousSpeed, 0.0f);
-		rb.velocity = newSideSpeed;
-		notRetrieved = true;
-		if (previousSpeed == 0) {			
-			rb.AddForce (Vector2.right * thrust);
+		if (previousSpeed != 0) {
+			rb.velocity = newSideSpeed;
+			notRetrieved = true;
+		}
+		else{
+			if ((this.returnDirection()).Equals ("R")) {	
+				Debug.Log (direction);
+				rb.AddForce (Vector2.right * thrust);
+			} 
+			else {
+				Debug.Log (direction);
+				rb.AddForce (Vector2.left * thrust);
+			}
+				
 		}
 
 	}
+
+	public void right(){
+		direction = "R";
+	}
+
+	public void left(){
+		direction = "L";
+	}
+
+	public string returnDirection(){
+		return direction;
+	}
+	
+
+
+
+
 
 }
