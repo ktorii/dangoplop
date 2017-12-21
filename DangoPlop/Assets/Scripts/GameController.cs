@@ -5,13 +5,8 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
 	private bool isGameRunning = false;
-	// music starts only for first pause
-	private bool firstPauseInitiated = false;
-	public GameObject musicManagerObject;
-	private MusicManager musicManagerScript;
 
 	void Start () {
-		musicManagerScript = musicManagerObject.GetComponent<MusicManager> ();
 	}
 
 	void Update () {
