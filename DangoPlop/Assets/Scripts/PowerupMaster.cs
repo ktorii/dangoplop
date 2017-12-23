@@ -48,6 +48,7 @@ public class PowerupMaster : MonoBehaviour {
 	private GameObject playerObject;
 	private PlayerController playerController;
 	private Ball_Factory ballFactory;
+    // private PowerupFactory powerupFactory;
 
 	// Use this for initialization
 	void Start () {
@@ -55,6 +56,7 @@ public class PowerupMaster : MonoBehaviour {
 		playerObject = GameObject.FindGameObjectWithTag ("Player");
 		playerController = playerObject.GetComponent<PlayerController> ();
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
+        // powerupFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<PowerupFactory> ();
 	}
 
 	// Update is called once per frame

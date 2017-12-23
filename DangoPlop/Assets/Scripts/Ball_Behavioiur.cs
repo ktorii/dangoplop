@@ -46,6 +46,7 @@ public class Ball_Behavioiur : MonoBehaviour {
 	private GameObject ground;
 	private double distance;
 	private Ball_Factory ballFactory;
+    private PowerupFactory powerupFactory;
 	public static bool timePaused;
 	public static bool notRetrieved;
 	public string direction;
@@ -65,7 +66,8 @@ public class Ball_Behavioiur : MonoBehaviour {
 		BoxCollider2D thickness = ground.GetComponent<BoxCollider2D> ();
 		distance = maxHeight-(ground.transform.position.y + (thickness.size.y/2));
 		ballFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<Ball_Factory> ();
-		ballFactory.addList (this.gameObject);
+		powerupFactory = GameObject.FindGameObjectWithTag ("GameController").GetComponent<PowerupFactory> ();
+        ballFactory.addList (this.gameObject);
 		notRetrieved = true;
 
     }
@@ -157,6 +159,8 @@ public class Ball_Behavioiur : MonoBehaviour {
                 ball2.smallHeight();
 
             }
+
+            powerupFactory.spawnPowerup(transform.position, transform.rotation);
 
 		}
 		if (Projectile == true) {

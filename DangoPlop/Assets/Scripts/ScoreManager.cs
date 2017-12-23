@@ -27,6 +27,26 @@ public class ScoreManager : MonoBehaviour {
 			PlayerPrefs.SetInt ("HighScore", Score);
 			PlayerPrefs.Save ();
 		}
+        if (Score >= 500 && Score < 1000) {
+            score.color = new Color(0.0f/255.0f, 102.0f/255.0f, 0.0f/255.0f);
+        }
+        else if (Score >= 1000 && Score < 2000) {
+            score.color = new Color(0.0f/255.0f, 153.0f/255.0f, 153.0f/255.0f);
+            
+        }
+        else if (Score >= 2000 && Score < 3000) {
+            score.color = new Color(0.0f/255.0f, 0.0f/255.0f, 255.0f/255.0f);
+            
+        }
+        else if (Score >= 3000 && Score < 4000) {
+            score.color = new Color(255.0f/255.0f, 0.0f/255.0f, 255.0f/255.0f);
+        }
+        else if (Score >= 4000 && Score < 5000) {
+            score.color = new Color(255.0f/255.0f, 102.0f/255.0f, 0.0f/255.0f);
+        }
+        else if (Score >= 5000) {
+            score.color = new Color(255.0f/255.0f, 0.0f/255.0f, 0.0f/255.0f);
+        }
 
 	}
 }

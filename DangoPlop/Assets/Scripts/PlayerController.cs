@@ -24,9 +24,10 @@ public class PlayerController : MonoBehaviour {
 	public GameObject Projectile3;
 	public GameObject Laser;
 	private GameObject ProjectilePos;
-	public int Ammo = 3;
-	public float currentDoubleShotAmmo;
-	public float maxDoubleShotAmmo;
+	public int Ammo;
+    public int maxAmmo;
+	public int currentDoubleShotAmmo;
+	public int maxDoubleShotAmmo;
     public Animator anim;
 	private Vector3 originalScale;
 	private float originalHeight;
@@ -113,10 +114,10 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 && AmmoReset == true) {
-			Ammo = 3;
-			currentDoubleShotAmmo = 3;
-		}
+		// if (Ammo > 3 && AmmoReset == true || currentDoubleShotAmmo > 3 && AmmoReset == true) {
+		// 	Ammo = 3;
+		// 	currentDoubleShotAmmo = 3;
+		// }
 
 		rb2d.velocity = new Vector2 (moveHorizontal, rb2d.velocity.y);
 
@@ -155,33 +156,34 @@ public class PlayerController : MonoBehaviour {
     }
 
 	public void Fire(){
-		if (bulletType == BulletType.DefaultFire) {
-			nextFire = Time.time + FireRate;
-			Instantiate (Projectile, ProjectilePos.transform.position, Quaternion.identity);
-			anim.SetBool("Shot", true);
-			Ammo--;
-		}
-		else if (bulletType == BulletType.Laser) {
-			nextFire = Time.time + LaserRate;
-			Instantiate (Laser, ProjectilePos.transform.position, Quaternion.identity);
-			anim.SetBool("Shot", true);
-			Ammo--;
-			soundLaser1.Play ();
-			soundLaser2.Play ();
-		}
-		else if (bulletType == BulletType.DoubleShot && currentDoubleShotAmmo > 0) {
-			nextFire = Time.time + DoubleShotRate;
+        switch (bulletType) {
+		case BulletType.DoubleShot:
+            nextFire = Time.time + DoubleShotRate;
 			var doubleShot1 = Instantiate (Projectile2, ProjectilePos.transform.position, Quaternion.identity);
 			var doubleShot2 = Instantiate (Projectile3, ProjectilePos.transform.position, Quaternion.identity);
 			doubleShot1.transform.Translate (FirstBulletTranslateX, FirstBulletTranslateY, 0, Space.World);
 			doubleShot2.transform.Translate (SecondBulletTranslateX, SecondBulletTranslateY, 0, Space.World);
 			anim.SetBool("Shot", true);
-			currentDoubleShotAmmo--;
-		}
-		else if (bulletType == BulletType.RapidFire) {
-			nextFire = Time.time + FireRate;
+			Ammo -= 2;
+			break;
+		case BulletType.Laser:
+            nextFire = Time.time + LaserRate;
+			Instantiate (Laser, ProjectilePos.transform.position, Quaternion.identity);
+			anim.SetBool("Shot", true);
+			soundLaser1.Play ();
+			soundLaser2.Play ();
+			break;
+        case BulletType.RapidFire:
+            nextFire = Time.time + FireRate;
 			Instantiate (Projectile2, ProjectilePos.transform.position, Quaternion.identity);
-
+            anim.SetBool("Shot", true);
+            break;
+		default:
+            nextFire = Time.time + FireRate;
+			Instantiate (Projectile, ProjectilePos.transform.position, Quaternion.identity);
+			anim.SetBool("Shot", true);
+			Ammo--;
+			break;
 		}
 	}
 
@@ -195,24 +197,26 @@ public class PlayerController : MonoBehaviour {
 
 	public void laser(){
 		bulletType = BulletType.Laser;
+        Ammo = 1;
 		AmmoReset = false;
 	}
 
 	public void doubleShot(){
 		bulletType = BulletType.DoubleShot;
-		currentDoubleShotAmmo = maxDoubleShotAmmo;
+		Ammo = maxDoubleShotAmmo;
 		AmmoReset = true;
 
 	}
 
 	public void rapidFire(){
+        Ammo = 1;
 		bulletType = BulletType.RapidFire;
 	}
 
 	public void defaultFire(){
+        Ammo = maxAmmo;
 		bulletType = BulletType.DefaultFire;
 		AmmoReset = true;
-
 	}
 
     IEnumerator Wait()

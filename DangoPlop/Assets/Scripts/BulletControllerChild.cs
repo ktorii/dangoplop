@@ -7,7 +7,7 @@ public class BulletControllerChild : BulletController {
 	public override void OnTriggerEnter2D(Collider2D target){
 		if (target.gameObject.CompareTag ("Ceiling") || target.gameObject.CompareTag ("Ball") && ammo != null ) {
 			if (ammo.bulletType == BulletType.DoubleShot) {
-				ammo.currentDoubleShotAmmo++;
+				ammo.Ammo++;
 			}
 			Destroy (gameObject);
 		}
