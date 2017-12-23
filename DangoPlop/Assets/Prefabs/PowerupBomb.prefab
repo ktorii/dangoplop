@@ -114,7 +114,7 @@ MonoBehaviour:
   powerupGlow: {fileID: 1374429659103120, guid: 5635a64fa82454042addfa93354b19b0,
     type: 2}
   powerupCategory: 1
-  timeLastingPowerup: 2
+  timeLastingPowerup: 1
 --- !u!212 &212883482479446400
 SpriteRenderer:
   m_ObjectHideFlags: 1
