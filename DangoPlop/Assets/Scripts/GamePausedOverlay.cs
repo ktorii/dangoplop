@@ -16,7 +16,7 @@ public class GamePausedOverlay : MonoBehaviour {
 	}
 
 	public void SetPause (bool input) {
-		print("SetPause called with " + input.ToString());
+		// print("SetPause called with " + input.ToString());
 		GamePausedUI.SetActive(input);
 	}
 }

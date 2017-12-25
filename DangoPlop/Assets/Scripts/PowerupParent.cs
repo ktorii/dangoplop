@@ -39,7 +39,7 @@ public class PowerupParent : MonoBehaviour {
 		powerupMaster = GameObject.FindGameObjectWithTag ("PowerupPanel").GetComponent<PowerupMaster> ();
 		ground = GameObject.FindGameObjectWithTag ("Ground");
 		groundYPosition = ground.transform.position.y + (ground.GetComponent<BoxCollider2D> ().size.y/2);
-		print (groundYPosition);
+		// print (groundYPosition);
 		ballLayerIndex = LayerMask.NameToLayer(ballLayerName);
 	}
 
@@ -58,7 +58,7 @@ public class PowerupParent : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if(other.tag == playerTag){
 			
-			print("powerup collision detected");
+			// print("powerup collision detected");
 
 			// particle effects
 			if (powerupCategory == PowerupCategory.Bad) {
@@ -82,7 +82,7 @@ public class PowerupParent : MonoBehaviour {
 	}
 
 	public virtual void HandlePowerupAction(float powerupLastingTime) {
-		print ("powerup parent HandlePowerupAction()");
+		// print ("powerup parent HandlePowerupAction()");
 	}
 
 }

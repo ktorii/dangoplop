@@ -67,7 +67,7 @@ public class MusicManager : MonoBehaviour {
 			changeMusicType ();
 		}
 
-		print (currentSongIndexPlaying);
+		// print (currentSongIndexPlaying);
 
 		string prevScene = currentScene;
 		currentScene = SceneManager.GetActiveScene ().name;

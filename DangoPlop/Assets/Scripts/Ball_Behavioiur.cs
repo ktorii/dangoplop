@@ -227,11 +227,11 @@ public class Ball_Behavioiur : MonoBehaviour {
 		}
 		else{
 			if ((this.returnDirection()).Equals ("R")) {	
-				Debug.Log (direction);
+				// Debug.Log (direction);
 				rb.AddForce (Vector2.right * thrust);
 			} 
 			else {
-				Debug.Log (direction);
+				// Debug.Log (direction);
 				rb.AddForce (Vector2.left * thrust);
 			}
 				

@@ -78,7 +78,7 @@ public class Ball_Factory : MonoBehaviour {
         if (count == maxBalls)
         {
             notInLoop = true;
-            Debug.Log("DONE RECURSION");
+            // Debug.Log("DONE RECURSION");
         }
         else
         {

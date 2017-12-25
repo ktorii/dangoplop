@@ -46,7 +46,7 @@ public class GameOverMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("GamePlay");
         Ball_Factory.count = 0;
-        Debug.Log(Ball_Factory.count);
+        // Debug.Log(Ball_Factory.count);
         Time.timeScale = 1;
     }
 

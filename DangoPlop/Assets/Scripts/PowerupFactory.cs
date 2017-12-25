@@ -30,10 +30,10 @@ public class PowerupFactory : MonoBehaviour {
     public void spawnPowerup(Vector3 position, Quaternion rotation) {
         // don't spawn anything if lucky
         float randNum = Random.Range(0.0f, 1.0f);
-        Debug.Log(ScoreManager.Score);
-        Debug.Log(scoreToIncreaseChance);
-        Debug.Log((int)(ScoreManager.Score / scoreToIncreaseChance));
-        Debug.Log((int)(ScoreManager.Score / scoreToIncreaseChance) * moreChancePerScore);
+        // Debug.Log(ScoreManager.Score);
+        // Debug.Log(scoreToIncreaseChance);
+        // Debug.Log((int)(ScoreManager.Score / scoreToIncreaseChance));
+        // Debug.Log((int)(ScoreManager.Score / scoreToIncreaseChance) * moreChancePerScore);
         if (randNum > chanceOfSpawnPowerup + ((int)(ScoreManager.Score / scoreToIncreaseChance) * moreChancePerScore)) {
             return;
         }
@@ -43,7 +43,7 @@ public class PowerupFactory : MonoBehaviour {
         spawnPosition.y += spawnOffset.y;
 
         // choose random powerup type
-        int randInt = Random.Range(0, 6);
+        int randInt = Random.Range(0, 7);
 
         // instantiate powerup
 		switch (randInt) {

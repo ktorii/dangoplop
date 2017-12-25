@@ -505,7 +505,7 @@ namespace TwoDLaserPack
 				ballObject = hitInfo.collider.gameObject;
 				ballController = ballObject.GetComponent<Ball_Behavioiur> ();
 				ballController.HandleSplit ();
-				Debug.Log ("Hit");
+				// Debug.Log ("Hit");
 				isTriggered = true;
 
 

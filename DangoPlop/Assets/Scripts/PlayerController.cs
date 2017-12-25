@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Ball")
         {
-			Debug.Log ("dead");
+			// Debug.Log ("dead");
 			anim.SetBool ("Dead", true);
 			collider.isTrigger = true;
            FindObjectOfType<GameOverMenu>().EndGame();
