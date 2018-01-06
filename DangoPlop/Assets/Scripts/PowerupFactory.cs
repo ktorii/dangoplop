@@ -66,6 +66,7 @@ public class PowerupFactory : MonoBehaviour {
 			Instantiate(powerupShrink, spawnPosition, rotation);
 			break;
 		case 6:
+            // Debug.Log("time");
 			Instantiate(powerupTime, spawnPosition, rotation);
 			break;
     	// case PowerupType.Life:
